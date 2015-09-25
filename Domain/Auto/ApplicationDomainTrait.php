@@ -1,11 +1,11 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Domain\Auto;
+namespace LinkValue\MobileNotifBundle\Domain\Auto;
 
-use PushNotification\Si\Component\Application\Entity\Application;
-use PushNotification\Si\Component\Application\Event\ApplicationEvent;
-use PushNotification\Si\Component\Application\Event\ApplicationEvents;
-use PushNotification\Si\Component\Application\Repository\ApplicationRepositoryInterface;
+use LinkValue\MobileNotifBundle\Entity\Application;
+use LinkValue\MobileNotifBundle\Event\ApplicationEvent;
+use LinkValue\MobileNotifBundle\Event\ApplicationEvents;
+use LinkValue\MobileNotifBundle\Repository\ApplicationRepositoryInterface;
 
 /**
  * Application domain use cases auto generated trait.

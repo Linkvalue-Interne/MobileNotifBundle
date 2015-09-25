@@ -1,17 +1,17 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Tests\Domain;
+namespace LinkValue\MobileNotifBundle\Tests\Domain;
 
-use PushNotification\Si\Component\Application\Entity\Application;
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileMessage;
-use PushNotification\Si\Component\Application\Tests\Domain\Auto\ApplicationDomainTestTrait;
+use LinkValue\MobileNotifBundle\Entity\Application;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Tests\Domain\Auto\ApplicationDomainTestTrait;
 use PHPUnit_Framework_TestCase;
 
 /**
  * Unit test class for ApplicationDomain.php.
  *
- * @see PushNotification\Si\Component\Application\Domain\ApplicationDomain
- * @see PushNotification\Si\Component\Application\Tests\Domain\Auto\ApplicationDomainTestTrait
+ * @see LinkValue\MobileNotifBundle\Domain\ApplicationDomain
+ * @see LinkValue\MobileNotifBundle\Tests\Domain\Auto\ApplicationDomainTestTrait
  */
 class ApplicationDomainTest extends PHPUnit_Framework_TestCase
 {
@@ -51,7 +51,7 @@ class ApplicationDomainTest extends PHPUnit_Framework_TestCase
 
         $applicationDomain = $this->createDomain($arguments);
 
-        $mobileClient = $this->prophesize('PushNotification\Si\Component\Application\Entity\MobileClient\MobileClientInterface');
+        $mobileClient = $this->prophesize('LinkValue\MobileNotifBundle\Entity\MobileClient\MobileClientInterface');
 
         $applicationDomain->registerMobileClient(
             $applicationType,

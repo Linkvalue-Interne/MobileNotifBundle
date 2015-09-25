@@ -1,6 +1,6 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Entity;
+namespace LinkValue\MobileNotifBundle\Entity;
 
 /**
  * Application model class.

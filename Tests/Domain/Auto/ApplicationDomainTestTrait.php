@@ -1,10 +1,10 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Tests\Domain\Auto;
+namespace LinkValue\MobileNotifBundle\Tests\Domain\Auto;
 
-use PushNotification\Si\Component\Application\Entity\Application;
-use PushNotification\Si\Component\Application\Event\ApplicationEvent;
-use PushNotification\Si\Component\Application\Event\ApplicationEvents;
+use LinkValue\MobileNotifBundle\Entity\Application;
+use LinkValue\MobileNotifBundle\Event\ApplicationEvent;
+use LinkValue\MobileNotifBundle\Event\ApplicationEvents;
 use Prophecy\Prophecy\ObjectProphecy;
 
 /**
@@ -22,7 +22,7 @@ trait ApplicationDomainTestTrait
     public function domainArgumentsProvider()
     {
         return array(array(array(
-            'repository' => $this->prophesize('PushNotification\Si\Component\Application\Repository\ApplicationRepositoryInterface'),
+            'repository' => $this->prophesize('LinkValue\MobileNotifBundle\Repository\ApplicationRepositoryInterface'),
             'event_dispatcher' => $this->prophesize('Symfony\Component\EventDispatcher\EventDispatcherInterface'),
             'validator' => $this->prophesize('Symfony\Component\Validator\Validator\ValidatorInterface'),
         )));
@@ -39,7 +39,7 @@ trait ApplicationDomainTestTrait
         unset($arguments['event_dispatcher']);
         unset($arguments['validator']);
 
-        $domain = (new \ReflectionClass('PushNotification\Si\Component\Application\Domain\ApplicationDomain'))
+        $domain = (new \ReflectionClass('LinkValue\MobileNotifBundle\Domain\ApplicationDomain'))
             ->newInstanceArgs(array_map(function ($class) {
                 return $class instanceof ObjectProphecy ?
                     $class->reveal() : $class

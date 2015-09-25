@@ -1,14 +1,14 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Bridge\Mobile\IOs;
+namespace LinkValue\MobileNotifBundle\Bridge\Mobile\IOs;
 
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
 use PHPUnit_Framework_TestCase;
 
 /**
  * Unit test class for AppleMobileClient.php.
  *
- * @see PushNotification\Si\Component\Application\Bridge\Mobile\IOs\AppleMobileClient
+ * @see LinkValue\MobileNotifBundle\Bridge\Mobile\IOs\AppleMobileClient
  */
 class AppleMobileClientTest extends PHPUnit_Framework_TestCase
 {
@@ -32,7 +32,7 @@ class AppleMobileClientTest extends PHPUnit_Framework_TestCase
      */
     public function testFailToConnectToPushServer()
     {
-        $this->setExpectedException('PushNotification\Si\Component\Application\Entity\MobileClient\Exception\PushException');
+        $this->setExpectedException('LinkValue\MobileNotifBundle\Entity\MobileClient\Exception\PushException');
 
         $message = (new MobileMessage())
             ->setDeviceToken('123456789 123456789 123456789 123456789')

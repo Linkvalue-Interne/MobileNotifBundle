@@ -1,6 +1,6 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Entity\MobileClient;
+namespace LinkValue\MobileNotifBundle\Entity\MobileClient;
 
 class MobileMessage
 {

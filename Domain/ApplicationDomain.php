@@ -1,15 +1,15 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Domain;
+namespace LinkValue\MobileNotifBundle\Domain;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use PushNotification\Si\Component\Application\Domain\Auto\ApplicationDomainTrait;
-use PushNotification\Si\Component\Application\Entity\Application;
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileClientInterface;
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileMessage;
-use PushNotification\Si\Component\Application\Event\ApplicationEvent;
-use PushNotification\Si\Component\Application\Event\ApplicationEvents;
-use PushNotification\Si\Component\Application\Repository\ApplicationRepositoryInterface;
+use LinkValue\MobileNotifBundle\Domain\Auto\ApplicationDomainTrait;
+use LinkValue\MobileNotifBundle\Entity\Application;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileClientInterface;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Event\ApplicationEvent;
+use LinkValue\MobileNotifBundle\Event\ApplicationEvents;
+use LinkValue\MobileNotifBundle\Repository\ApplicationRepositoryInterface;
 
 /**
  * Application domain use cases class.

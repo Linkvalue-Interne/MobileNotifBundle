@@ -1,8 +1,8 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Event;
+namespace LinkValue\MobileNotifBundle\Event;
 
-use PushNotification\Si\Component\Application\Entity\Application;
+use LinkValue\MobileNotifBundle\Entity\Application;
 
 /**
  * Application specific event class.

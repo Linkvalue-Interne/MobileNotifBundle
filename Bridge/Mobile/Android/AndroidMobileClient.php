@@ -1,9 +1,9 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Bridge\Mobile\Android;
+namespace LinkValue\MobileNotifBundle\Bridge\Mobile\Android;
 
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileClientInterface;
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileClientInterface;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
 use GuzzleHttp\Client as GuzzleClient;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

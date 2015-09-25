@@ -1,10 +1,10 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Bridge\Mobile\IOs;
+namespace LinkValue\MobileNotifBundle\Bridge\Mobile\IOs;
 
-use PushNotification\Si\Component\Application\Entity\MobileClient\Exception\PushException;
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileClientInterface;
-use PushNotification\Si\Component\Application\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\Exception\PushException;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileClientInterface;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
@@ -36,10 +36,11 @@ class AppleMobileClient implements MobileClientInterface
     /**
      * ApplePushNotificationClient constructor.
      *
-     * @param LoggerInterface $logger
+     *
      * @param $pushServerEndpoint
      * @param $bundlePath
      * @param $bundlePassphrase
+     * @param LoggerInterface $logger
      *
      * @throws \InvalidArgumentException
      */

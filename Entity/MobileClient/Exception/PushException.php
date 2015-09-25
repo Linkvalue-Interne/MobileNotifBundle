@@ -1,6 +1,6 @@
 <?php
 
-namespace PushNotification\Si\Component\Application\Entity\MobileClient\Exception;
+namespace LinkValue\MobileNotifBundle\Entity\MobileClient\Exception;
 
 /**
  * Exception class thrown when an unexpected error occurs
