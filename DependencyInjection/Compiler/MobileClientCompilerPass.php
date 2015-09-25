@@ -25,12 +25,12 @@ class MobileClientCompilerPass implements CompilerPassInterface
 
         foreach ($tagged as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
-                if (empty($attribute['support'])) {
-                    throw new \InvalidArgumentException(sprintf('"link_value_mobile_notif.mobile_client" tag must define "support" key.'));
+                if (empty($attribute['key'])) {
+                    throw new \InvalidArgumentException(sprintf('"link_value_mobile_notif.mobile_client" tag must define "key" key.'));
                 }
 
                 $definition->addMethodCall('addMobileClient', array(
-                    $attribute['support'],
+                    $attribute['key'],
                     new Reference($serviceId),
                 ));
             }
