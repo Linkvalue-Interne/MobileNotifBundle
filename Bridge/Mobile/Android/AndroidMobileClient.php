@@ -22,7 +22,12 @@ class AndroidMobileClient implements MobileClientInterface
     protected $guzzleClient;
 
     /**
-     * @var array
+     * @var UrlGeneratorInterface
+     */
+    protected $router;
+
+    /**
+     * @var array $pushServerURL
      */
     protected $pushServerURL;
 
@@ -46,21 +51,28 @@ class AndroidMobileClient implements MobileClientInterface
      * @param string                $apiKey
      */
     public function __construct(
-        GuzzleClient $guzzleClient,
-        UrlGeneratorInterface $router,
-        $pushServerRoute,
-        LoggerInterface $logger,
-        $apiKey
-    ) {
+    GuzzleClient $guzzleClient, UrlGeneratorInterface $router, LoggerInterface $logger
+    )
+    {
         $this->guzzleClient = $guzzleClient;
-        $this->logger = $logger;
-        $this->apiKey = $apiKey;
+        $this->router       = $router;
+        $this->logger       = $logger;
+    }
 
+    /**
+     * Set up the arguments from the configuration file
+     *
+     * @param array $params
+     */
+    public function setUp(array $params)
+    {
         // Fetch pushServerURL
-        $ctx = $router->getContext();
-        $router->setContext(new RequestContext());
-        $this->pushServerURL = $router->generate($pushServerRoute, array(), true);
-        $router->setContext($ctx);
+        $ctx                 = $this->getContext();
+        $this->setContext(new RequestContext());
+        $this->pushServerURL = $this->router->generate($params['pushServerUrl'], array(), true);
+        $this->router->setContext($ctx);
+
+        $this->apiKey = $params['apiKey'];
     }
 
     /**
