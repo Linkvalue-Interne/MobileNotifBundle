@@ -1,0 +1,4 @@
+services:
+#    link_value_mobile_notif.example:
+#        class: LinkValue\MobileNotifBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
