@@ -36,32 +36,32 @@ class AppleMobileClient implements MobileClientInterface
     /**
      * ApplePushNotificationClient constructor.
      *
-     *
-     * @param $pushServerEndpoint
-     * @param $bundlePath
-     * @param $bundlePassphrase
      * @param LoggerInterface $logger
      *
-     * @throws \InvalidArgumentException
      */
-    public function __construct(
-        $pushServerEndpoint,
-        $bundlePath,
-        $bundlePassphrase,
-        LoggerInterface $logger
-    ) {
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * Set up the arguments from the configuration file
+     *
+     * @param array $params
+     *
+     * @throws \FileNotFoundException
+     */
+    public function setUp(array $params)
+    {
         // Check if $bundlePath file exists
-        if (!is_readable($bundlePath)) {
+        if (!is_readable($params['ssl_pem_path'])) {
             throw new FileNotFoundException(sprintf(
-                '[%s] file does not exist.',
-                $bundlePath
+                    '[%s] file does not exist.', $params['ssl_pem_path']
             ));
         }
-
-        $this->pushServerEndpoint = $pushServerEndpoint;
-        $this->bundlePath = $bundlePath;
-        $this->bundlePassphrase = $bundlePassphrase;
-        $this->logger = $logger;
+        $this->pushServerEndpoint = $params['endpoint'];
+        $this->bundlePath         = $params['ssl_pem'];
+        $this->bundlePassphrase   = $params['passphrase'];
     }
 
     /**
@@ -71,7 +71,7 @@ class AppleMobileClient implements MobileClientInterface
     {
         // Structuring push message
         $payload = array(
-            'aps' => array(
+            'aps'  => array(
                 'badge' => 1,
                 'sound' => 'default',
                 'alert' => array(
@@ -80,7 +80,7 @@ class AppleMobileClient implements MobileClientInterface
             ),
             'data' => $mobileMessage->getData(),
         );
-        if ($args = $mobileMessage->getMessageArgs()) {
+        if ($args    = $mobileMessage->getMessageArgs()) {
             $payload['aps']['alert']['loc-args'] = array();
             foreach ($args as $arg) {
                 $payload['aps']['alert']['loc-args'][] = $arg;
@@ -90,41 +90,31 @@ class AppleMobileClient implements MobileClientInterface
 
         // Open a connection to the APNS server
         $this->logger->info('Connecting to Apple Push Notification server');
-        $ctx = stream_context_create(array(
+        $ctx    = stream_context_create(array(
             'ssl' => array(
                 'local_cert' => $this->bundlePath,
                 'passphrase' => $this->bundlePassphrase,
             ),
         ));
         $stream = stream_socket_client(
-            $this->pushServerEndpoint,
-            $errno,
-            $errstr,
-            30,
-            STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT,
-            $ctx
+                $this->pushServerEndpoint, $errno, $errstr, 30, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx
         );
 
         // Connection failed?
         if (!$stream) {
             throw new PushException(
-                'An error occured while trying to contact Apple Push Notification server.'
+            'An error occured while trying to contact Apple Push Notification server.'
             );
         }
 
         // Build the binary notification
-        $msg = sprintf('%s%s%s%s%s',
-            chr(0),
-            pack('n', 32),
-            pack('H*', str_replace(' ', '', $mobileMessage->getDeviceToken())),
-            pack('n', strlen($payload)),
-            $payload
+        $msg = sprintf('%s%s%s%s%s', chr(0), pack('n', 32), pack('H*', str_replace(' ', '', $mobileMessage->getDeviceToken())), pack('n', strlen($payload)), $payload
         );
 
         // Send it to the server
         $this->logger->info('Sending message to Apple Push Notification server', array(
             'deviceToken' => $mobileMessage->getDeviceToken(),
-            'payload' => $payload,
+            'payload'     => $payload,
         ));
         fwrite($stream, $msg, strlen($msg));
 
