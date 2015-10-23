@@ -10,7 +10,6 @@ use Prophecy\Prophecy\ObjectProphecy;
 /**
  * Tests traits for ApplicationDomainTest PHPUnit test case class.
  *
- * @MajoraGenerator({"force_generation": true})
  */
 trait ApplicationDomainTestTrait
 {
