@@ -24,7 +24,7 @@ class LinkValueMobileNotifExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $clientNamespace = "LinkValue\MobileNotifBundle\Bridge\Mobile\Android";
+        $clientNamespace = "LinkValue\MobileNotifBundle\Bridge\Mobile";
 
         foreach ($config["clients"] as $type => $clients) {
 
@@ -32,7 +32,7 @@ class LinkValueMobileNotifExtension extends Extension
                 $services = isset($data['services']) ? $data['services'] : array();
                 $params = isset($data['params']) ? $data['params'] : array();
 
-                $clientClass = $type == "ios" ? "AppleMobileClient" : "AndroidMobileClient";
+                $clientClass = $type == "ios" ? "IOs\AppleMobileClient" : "Android\AndroidMobileClient";
 
                 $client = new Definition($clientNamespace . "\\" . $clientClass);
 
@@ -40,7 +40,7 @@ class LinkValueMobileNotifExtension extends Extension
                     $client->addArgument(new Reference($service_id));
                 }
 
-                $client->addMethodCall('setUp', $params);
+                $client->addMethodCall('setUp', array($params));
 
                 $container->setDefinition($name, $client);
             }

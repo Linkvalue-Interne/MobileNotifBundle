@@ -54,9 +54,9 @@ class AppleMobileClient implements MobileClientInterface
     public function setUp(array $params)
     {
         // Check if $bundlePath file exists
-        if (!is_readable($params['ssl_pem_path'])) {
+        if (!is_readable($params['ssl_pem'])) {
             throw new FileNotFoundException(sprintf(
-                    '[%s] file does not exist.', $params['ssl_pem_path']
+                    '[%s] file does not exist.', $params['ssl_pem']
             ));
         }
         $this->pushServerEndpoint = $params['endpoint'];

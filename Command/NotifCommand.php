@@ -32,15 +32,17 @@ class NotifCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $mobileNotif = $this->getContainer()->get('link_value_mobile_notif.mobile_notif');
-        $mobileNotif->using($input->getArgument('client'));
-
         $message = new MobileMessage();
         $message
             ->setDeviceToken($input->getArgument('device'))
             ->setMessage($input->getArgument('message'))
         ;
 
-        $mobileNotif->push($message);
+        //$mobileNotif = $this->getContainer()->get('link_value_mobile_notif.mobile_notif');
+        //$mobileNotif->using($input->getArgument('client'));
+        //$mobileNotif->push($message);
+        //
+        $client = $this->getContainer()->get('default_1');
+        $client->push($message);
     }
 }
