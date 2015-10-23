@@ -16,15 +16,27 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class LinkValueMobileNotifExtension extends Extension
 {
+    private $container;
+
     /**
      * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $this->container = $container;
+
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $clientNamespace = "LinkValue\MobileNotifBundle\Bridge\Mobile";
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
+
+        $this->loadClients($config);
+    }
+
+    private function loadClients($config)
+    {
+        $clientNamespace = "LinkValue\MobileNotifBundle\Client";
 
         foreach ($config["clients"] as $type => $clients) {
 
@@ -32,7 +44,7 @@ class LinkValueMobileNotifExtension extends Extension
                 $services = isset($data['services']) ? $data['services'] : array();
                 $params = isset($data['params']) ? $data['params'] : array();
 
-                $clientClass = $type == "ios" ? "IOs\AppleMobileClient" : "Android\AndroidMobileClient";
+                $clientClass = $type == "ios" ? "AppleClient" : "AndroidClient";
 
                 $client = new Definition($clientNamespace . "\\" . $clientClass);
 
@@ -41,12 +53,10 @@ class LinkValueMobileNotifExtension extends Extension
                 }
 
                 $client->addMethodCall('setUp', array($params));
+                $client->addTag('link_value_mobile_notif.client');
 
-                $container->setDefinition('link_value_mobile_notif.'.$name, $client);
+                $this->container->set('linkvalue.mobilenotif.client.'.$name, $client);
             }
         }
-
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
     }
 }

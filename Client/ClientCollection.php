@@ -28,7 +28,7 @@ class ClientCollection extends ArrayCollection
      *
      * @throws InvalidArgumentException if the key is not a String
      */
-    public function addClient($key, ClientInterface $client)
+    public function addClient($key, Definition $client)
     {
         if (!is_string($key))
             throw new InvalidArgumentException('The key must be a string.');

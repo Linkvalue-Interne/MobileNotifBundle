@@ -16,12 +16,12 @@ class MobileClientCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('link_value_mobile_notif.mobile_notif')) {
+        if (!$container->hasDefinition('linkvalue.mobilenotif.clients')) {
             return;
         }
 
-        $definition = $container->getDefinition('link_value_mobile_notif.mobile_notif');
-        $tagged = $container->findTaggedServiceIds('link_value_mobile_notif.mobile_client');
+        $clientCollection = $container->getDefinition('linkvalue.mobilenotif.clients');
+        $tagged = $container->findTaggedServiceIds('link_value_mobile_notif.client');
 
         foreach ($tagged as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
