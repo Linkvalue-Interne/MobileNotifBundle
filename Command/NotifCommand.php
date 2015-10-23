@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Model\Message;
 
 class NotifCommand extends ContainerAwareCommand
 {
@@ -32,17 +32,12 @@ class NotifCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $message = new MobileMessage();
+        $message = new Message();
         $message
             ->setDeviceToken($input->getArgument('device'))
             ->setMessage($input->getArgument('message'))
         ;
 
-        //$mobileNotif = $this->getContainer()->get('link_value_mobile_notif.mobile_notif');
-        //$mobileNotif->using($input->getArgument('client'));
-        //$mobileNotif->push($message);
-        //
-        $client = $this->getContainer()->get('link_value_mobile_notif.'.$input->getArgument('client'));
-        $client->push($message);
+        $this->getContainer()->get('linkvalue.mobilenotif.clients')->get($input->getArgument('client'))->push($message);
     }
 }

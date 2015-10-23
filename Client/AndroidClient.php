@@ -1,20 +1,19 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Bridge\Mobile\Android;
+namespace LinkValue\MobileNotifBundle\Client;
 
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileClientInterface;
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
-use GuzzleHttp\Client as GuzzleClient;
-use Psr\Log\LoggerInterface;
+use LinkValue\MobileNotifBundle\Model\Message;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
+use GuzzleHttp\Client\GuzzleClient;
+use Psr\Log\LoggerInterface;
 
 /**
  * GCM (Google Cloud Messaging) implementation.
  *
  * @see https://developers.google.com/cloud-messaging/http
  */
-class AndroidMobileClient implements MobileClientInterface
+class AndroidClient implements ClientInterface
 {
     /**
      * @var GuzzleClient

@@ -1,17 +1,16 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Bridge\Mobile\IOs;
+namespace LinkValue\MobileNotifBundle\Client;
 
-use LinkValue\MobileNotifBundle\Entity\MobileClient\Exception\PushException;
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileClientInterface;
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
 use Psr\Log\LoggerInterface;
+use LinkValue\MobileNotifBundle\Exception\PushException;
+use LinkValue\MobileNotifBundle\Model\Message;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 /**
  * APNs (Apple Push Notification services) implementation.
  */
-class AppleMobileClient implements MobileClientInterface
+class AppleClient implements ClientInterface
 {
     /**
      * @var LoggerInterface

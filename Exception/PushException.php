@@ -1,6 +1,6 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Entity\MobileClient\Exception;
+namespace LinkValue\MobileNotifBundle\Exception;
 
 /**
  * Exception class thrown when an unexpected error occurs

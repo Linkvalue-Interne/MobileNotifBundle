@@ -1,8 +1,8 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Entity\MobileClient;
+namespace LinkValue\MobileNotifBundle\Model;
 
-class MobileMessage
+class Message
 {
     /**
      * @var string

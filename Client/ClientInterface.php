@@ -1,6 +1,6 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Entity\MobileClient;
+namespace LinkValue\MobileNotifBundle\Client;
 
 /**
  * Interface to implement on a Mobile Client class.

@@ -1,3 +1,6 @@
+parameters:
+    linkvalue.mobilenotif.client.client_collection: LinkValue\MobileNotifBundle\Client\ClientCollection
+
 services:
-    link_value_mobile_notif.mobile_notif:
-        class: LinkValue\MobileNotifBundle\MobileNotif
+    linkvalue.mobilenotif.clients:
+        class: %linkvalue.mobilenotif.client.client_collection%
