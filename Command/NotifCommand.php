@@ -32,7 +32,6 @@ class NotifCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /* @var $mobileNotif \LinkValue\MobileNotifBundle\MobileNotif */
         $mobileNotif = $this->getContainer()->get('link_value_mobile_notif.mobile_notif');
         $mobileNotif->using($input->getArgument('client'));
 
