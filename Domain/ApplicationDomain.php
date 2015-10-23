@@ -9,7 +9,6 @@ use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileClientInterface;
 use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
 use LinkValue\MobileNotifBundle\Event\ApplicationEvent;
 use LinkValue\MobileNotifBundle\Event\ApplicationEvents;
-use LinkValue\MobileNotifBundle\Repository\ApplicationRepositoryInterface;
 
 /**
  * Application domain use cases class.
@@ -20,7 +19,6 @@ use LinkValue\MobileNotifBundle\Repository\ApplicationRepositoryInterface;
  * @method edit(Application $application)
  * @method delete(Application $application)
  *
- * @property applicationRepository
  */
 class ApplicationDomain
 {
@@ -34,11 +32,9 @@ class ApplicationDomain
     /**
      * construct.
      *
-     * @param ApplicationRepositoryInterface $applicationRepository
      */
-    public function __construct(ApplicationRepositoryInterface $applicationRepository)
+    public function __construct()
     {
-        $this->applicationRepository = $applicationRepository;
         $this->mobileClients = new ArrayCollection();
     }
 
