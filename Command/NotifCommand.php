@@ -1,8 +1,12 @@
 <?php
 
-use Symfony\Component\Console\Command\ContainerAwareCommand;
+namespace LinkValue\MobileNotifBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
 
 class NotifCommand extends ContainerAwareCommand
