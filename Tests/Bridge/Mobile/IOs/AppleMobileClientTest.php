@@ -1,9 +1,11 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Bridge\Mobile\IOs;
+namespace LinkValue\MobileNotifBundle\Tests\Bridge\Mobile\IOs;
 
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
+
 use PHPUnit_Framework_TestCase;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Bridge\Mobile\IOs\AppleMobileClient;
 
 /**
  * Unit test class for AppleMobileClient.php.
