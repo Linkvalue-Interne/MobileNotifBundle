@@ -19,9 +19,9 @@ class NotifCommand extends ContainerAwareCommand
         $this
             ->setName('mobilenotif:push')
             ->setDescription('Push notification command.')
-            ->addArgument('device_token', InputArgument::REQUIRED, 'Token of the device which will receive the notification.')
+            ->addArgument('client', InputArgument::REQUIRED, 'Mobile client to use (use the first one by default)')
+            ->addArgument('device', InputArgument::REQUIRED, 'Token of the device which will receive the notification.')
             ->addArgument('message', InputArgument::REQUIRED, 'Notification message.')
-            ->addOption('mobile-client', 'm', InputOption::VALUE_REQUIRED, 'Mobile client to use (use the first one by default)', null)
         ;
     }
 
@@ -34,16 +34,14 @@ class NotifCommand extends ContainerAwareCommand
     {
         /* @var $mobileNotif \LinkValue\MobileNotifBundle\MobileNotif */
         $mobileNotif = $this->getContainer()->get('link_value_mobile_notif.mobile_notif');
+        $mobileNotif->using($input->getArgument('client'));
 
-        $mobileClientKey = $input->getOption('mobile-client');
-        if (!is_null($mobileClientKey)) {
-            $mobileNotif->using($mobileClientKey);
-        }
-
-        $message = (new MobileMessage())
-            ->setDeviceToken($input->getArgument('device_token'))
+        $message = new MobileMessage();
+        $message
+            ->setDeviceToken($input->getArgument('device'))
             ->setMessage($input->getArgument('message'))
         ;
+
         $mobileNotif->push($message);
     }
 }
