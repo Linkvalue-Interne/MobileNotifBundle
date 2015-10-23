@@ -1,4 +1,5 @@
 <?php
+
 namespace LinkValue\MobileNotifBundle;
 
 use InvalidArgumentException;
@@ -10,7 +11,7 @@ class MobileNotif implements MobileClientInterface
     /**
      * @var MobileClientInterface[]
      */
-    protected $mobileClients = [];
+    protected $clients;
 
     /**
      * Current mobile client key to use to retrieve the mobile client
@@ -18,7 +19,16 @@ class MobileNotif implements MobileClientInterface
      *
      * @var string
      */
-    protected $currentMobileClientKey = null;
+    protected $currentClientKey;
+
+    /**
+     * constructor
+     */
+    public function __construct()
+    {
+        $this->clients = array();
+        $this->currentClientKey = null;
+    }
 
     /**
      * @param string $key key to store the client
@@ -28,16 +38,13 @@ class MobileNotif implements MobileClientInterface
      *
      * @throws InvalidArgumentException if the key is not a String
      */
-    public function addMobileClient($key, MobileClientInterface $mobileClient)
+    public function addClient($key, MobileClientInterface $mobileClient)
     {
         if (!is_string($key)) {
             throw new InvalidArgumentException("Key must be a string");
         }
-        //Set the currentMobileClientKey to the first enter by default
-        if (is_null($this->currentMobileClientKey)) {
-            $this->currentMobileClientKey = $key;
-        }
-        $this->mobileClients[$key] = $mobileClient;
+
+        $this->clients[$key] = $mobileClient;
 
         return $this;
     }
@@ -52,10 +59,11 @@ class MobileNotif implements MobileClientInterface
      */
     public function using($key)
     {
-        if (array_key_exists($key, $this->mobileClients)) {
+        if (!array_key_exists($key, $this->clients)) {
             throw new InvalidArgumentException("Key not found");
         }
-        $this->currentMobileClientKey = $key;
+
+        $this->currentClientKey = $key;
 
         return $this;
     }
@@ -67,7 +75,7 @@ class MobileNotif implements MobileClientInterface
      */
     public function push(MobileMessage $mobileMessage)
     {
-        $this->mobileClients[$this->currentMobileClientKey]->push($mobileMessage);
+        $this->clients[$this->currentClientKey]->push($mobileMessage);
 
         return $this;
     }

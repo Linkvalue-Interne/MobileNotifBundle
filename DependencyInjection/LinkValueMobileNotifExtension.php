@@ -7,6 +7,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -23,17 +24,25 @@ class LinkValueMobileNotifExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $clientNamespace = "LinkValue\MobileNotifBundle\Bridge\Mobile\Android";
+        $clientNamespace = "LinkValue\MobileNotifBundle\Bridge\Mobile";
 
         foreach ($config["clients"] as $type => $clients) {
 
-            foreach ($clients as $name => $params) {
+            foreach ($clients as $name => $data) {
+                $services = isset($data['services']) ? $data['services'] : array();
+                $params = isset($data['params']) ? $data['params'] : array();
 
-                $clientClass = $type == "ios" ? "AppleMobileClient" : "AndroidMobileClient";
+                $clientClass = $type == "ios" ? "IOs\AppleMobileClient" : "Android\AndroidMobileClient";
 
-                $client = new Definition($clientNamespace . "\\" . $clientClass, $params);
+                $client = new Definition($clientNamespace . "\\" . $clientClass);
 
-                $container->setDefinition($name, $client);
+                foreach ($services as $service_id) {
+                    $client->addArgument(new Reference($service_id));
+                }
+
+                $client->addMethodCall('setUp', array($params));
+
+                $container->setDefinition('link_value_mobile_notif.'.$name, $client);
             }
         }
 

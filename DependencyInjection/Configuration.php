@@ -20,6 +20,10 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('link_value_mobile_notif');
 
+        /**
+         * @TODO add name validation.
+         * The client name need to be unique for ios and android
+         */
         $rootNode
             ->children()
                 ->arrayNode("clients")
@@ -30,9 +34,18 @@ class Configuration implements ConfigurationInterface
                             ->useAttributeAsKey("name")
                             ->prototype('array')
                                 ->children()
-                                    ->scalarNode("endpoint")->isRequired()->cannotBeEmpty()->end()
-                                    ->scalarNode("ssl_pem")->isRequired()->cannotBeEmpty()->end()
-                                    ->scalarNode("passphrase")->isRequired()->cannotBeEmpty()->end()
+                                    ->arrayNode("services")
+                                        ->children()
+                                            ->scalarNode("logger")->isRequired()->defaultValue("logger")->end()
+                                        ->end()
+                                    ->end()
+                                    ->arrayNode("params")
+                                        ->children()
+                                            ->scalarNode("endpoint")->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode("ssl_pem")->isRequired()->cannotBeEmpty()->end()
+                                            ->scalarNode("passphrase")->isRequired()->cannotBeEmpty()->end()
+                                        ->end()
+                                    ->end()
                                 ->end()
                             ->end()
                         ->end()
