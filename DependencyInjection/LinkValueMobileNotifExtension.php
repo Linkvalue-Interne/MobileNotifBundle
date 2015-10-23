@@ -42,7 +42,7 @@ class LinkValueMobileNotifExtension extends Extension
 
                 $client->addMethodCall('setUp', array($params));
 
-                $container->setDefinition($name, $client);
+                $container->setDefinition('link_value_mobile_notif.'.$name, $client);
             }
         }
 

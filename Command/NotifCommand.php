@@ -42,7 +42,7 @@ class NotifCommand extends ContainerAwareCommand
         //$mobileNotif->using($input->getArgument('client'));
         //$mobileNotif->push($message);
         //
-        $client = $this->getContainer()->get($input->getArgument('client'));
+        $client = $this->getContainer()->get('link_value_mobile_notif.'.$input->getArgument('client'));
         $client->push($message);
     }
 }
