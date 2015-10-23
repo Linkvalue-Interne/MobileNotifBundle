@@ -9,11 +9,8 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Collect all mobile clients and store it to application domain.
  */
-class MobileClientCompilerPass implements CompilerPassInterface
+class ClientCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @{inherit_doc}
-     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('linkvalue.mobilenotif.clients')) {
@@ -26,10 +23,10 @@ class MobileClientCompilerPass implements CompilerPassInterface
         foreach ($tagged as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
                 if (empty($attribute['key'])) {
-                    throw new \InvalidArgumentException(sprintf('"link_value_mobile_notif.mobile_client" tag must define "key" key.'));
+                    throw new \InvalidArgumentException(sprintf('"link_value_mobile_notif.client" tag must define "key" key.'));
                 }
 
-                $definition->addMethodCall('addMobileClient', array(
+                $clientCollection->addMethodCall('addClient', array(
                     $attribute['key'],
                     new Reference($serviceId),
                 ));

@@ -28,10 +28,10 @@ class LinkValueMobileNotifExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $this->loadClients($config);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-
-        $this->loadClients($config);
     }
 
     private function loadClients($config)
@@ -46,16 +46,16 @@ class LinkValueMobileNotifExtension extends Extension
 
                 $clientClass = $type == "ios" ? "AppleClient" : "AndroidClient";
 
-                $client = new Definition($clientNamespace . "\\" . $clientClass);
+                $client = $this->container->register('linkvalue.mobilenotif.client.'.$name, $clientNamespace . "\\" . $clientClass);
 
                 foreach ($services as $service_id) {
                     $client->addArgument(new Reference($service_id));
                 }
 
-                $client->addMethodCall('setUp', array($params));
-                $client->addTag('link_value_mobile_notif.client');
-
-                $this->container->set('linkvalue.mobilenotif.client.'.$name, $client);
+                $client
+                    ->addMethodCall('setUp', array($params))
+                    ->addTag('link_value_mobile_notif.client', array('key' => $name))
+                ;
             }
         }
     }

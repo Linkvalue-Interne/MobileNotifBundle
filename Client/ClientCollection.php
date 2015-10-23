@@ -8,19 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ClientCollection extends ArrayCollection
 {
     /**
-     * @var ClientCollection
-     */
-    protected $clients;
-
-    /**
-     * constructor
-     */
-    public function __construct()
-    {
-        $this->clients = array();
-    }
-
-    /**
      * @param string $key key to store the client
      * @param ClientInterface $client
      *
@@ -28,15 +15,15 @@ class ClientCollection extends ArrayCollection
      *
      * @throws InvalidArgumentException if the key is not a String
      */
-    public function addClient($key, Definition $client)
+    public function addClient($key, ClientInterface $client)
     {
         if (!is_string($key))
             throw new InvalidArgumentException('The key must be a string.');
 
-        if ($this->clients->has($key))
+        if ($this->containsKey($key))
             throw new RuntimeException(sprintf('A client with name "%s" already exists.', $key));
 
-        $this->clients->set($key, $client);
+        $this->set($key, $client);
 
         return $this;
     }

@@ -66,7 +66,7 @@ class AppleClient implements ClientInterface
     /**
      * @see MobileClientInterface::push()
      */
-    public function push(MobileMessage $mobileMessage)
+    public function push(Message $message)
     {
         // Structuring push message
         $payload = array(
@@ -74,12 +74,12 @@ class AppleClient implements ClientInterface
                 'badge' => 1,
                 'sound' => 'default',
                 'alert' => array(
-                    'loc-key' => $mobileMessage->getMessage(),
+                    'loc-key' => $message->getMessage(),
                 ),
             ),
-            'data' => $mobileMessage->getData(),
+            'data' => $message->getData(),
         );
-        if ($args    = $mobileMessage->getMessageArgs()) {
+        if ($args    = $message->getMessageArgs()) {
             $payload['aps']['alert']['loc-args'] = array();
             foreach ($args as $arg) {
                 $payload['aps']['alert']['loc-args'][] = $arg;
@@ -107,12 +107,12 @@ class AppleClient implements ClientInterface
         }
 
         // Build the binary notification
-        $msg = sprintf('%s%s%s%s%s', chr(0), pack('n', 32), pack('H*', str_replace(' ', '', $mobileMessage->getDeviceToken())), pack('n', strlen($payload)), $payload
+        $msg = sprintf('%s%s%s%s%s', chr(0), pack('n', 32), pack('H*', str_replace(' ', '', $message->getDeviceToken())), pack('n', strlen($payload)), $payload
         );
 
         // Send it to the server
         $this->logger->info('Sending message to Apple Push Notification server', array(
-            'deviceToken' => $mobileMessage->getDeviceToken(),
+            'deviceToken' => $message->getDeviceToken(),
             'payload'     => $payload,
         ));
         fwrite($stream, $msg, strlen($msg));
