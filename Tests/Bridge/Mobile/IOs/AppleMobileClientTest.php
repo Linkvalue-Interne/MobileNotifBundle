@@ -1,9 +1,10 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Bridge\Mobile\IOs;
+namespace LinkValue\MobileNotifBundle\Tests\Bridge\Mobile\IOs;
 
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
 use PHPUnit_Framework_TestCase;
+use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotifBundle\Bridge\Mobile\IOs\AppleMobileClient;
 
 /**
  * Unit test class for AppleMobileClient.php.
@@ -12,6 +13,7 @@ use PHPUnit_Framework_TestCase;
  */
 class AppleMobileClientTest extends PHPUnit_Framework_TestCase
 {
+
     /**
      * tests push() method throws an exception when an inexisting ssl bundle is given.
      */
@@ -19,12 +21,13 @@ class AppleMobileClientTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Symfony\Component\Filesystem\Exception\FileNotFoundException');
 
-        new AppleMobileClient(
-            'http://apple-push.com/endpoint',
-            '/this/file/probably/doesnt/exists/bundle.pem',
-            'random passphrase',
-            $this->prophesize('Psr\Log\LoggerInterface')->reveal()
-        );
+        (new AppleMobileClient($this->prophesize('Psr\Log\LoggerInterface')->reveal()))
+            ->setUp([
+                'endpoint' => 'http://apple-push.com/endpoint',
+                'ssl_pem' => '/this/file/probably/doesnt/exists/bundle.pem',
+                'passphrase' => 'random passphrase'
+            ])
+        ;
     }
 
     /**
@@ -35,17 +38,17 @@ class AppleMobileClientTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException('LinkValue\MobileNotifBundle\Entity\MobileClient\Exception\PushException');
 
         $message = (new MobileMessage())
-            ->setDeviceToken('123456789 123456789 123456789 123456789')
-            ->setMessage('apple <3')
+                ->setDeviceToken('123456789 123456789 123456789 123456789')
+                ->setMessage('apple <3')
         ;
 
-        $appleMobileClient = new AppleMobileClient(
-            'http://random-apple-push.com/endpoint',
-            __FILE__,
-            'random passphrase',
-            $this->prophesize('Psr\Log\LoggerInterface')->reveal()
-        );
-
-        @$appleMobileClient->push($message);
+        $mobileClient = new AppleMobileClient($this->prophesize('Psr\Log\LoggerInterface')->reveal());
+        $mobileClient->setUp([
+                'endpoint' => 'http://random-apple-push.com/endpoint',
+                'ssl_pem' => __FILE__,
+                'passphrase' => 'random passphrase'
+            ])
+        ;
+        $mobileClient->push($message);
     }
 }
