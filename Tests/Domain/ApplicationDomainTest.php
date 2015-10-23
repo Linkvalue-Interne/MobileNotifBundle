@@ -29,7 +29,6 @@ class ApplicationDomainTest extends PHPUnit_Framework_TestCase
         $application = new Application();
         $application
             ->setId(42)
-            ->setType('unregisteredClientType')
             ->setSupport('unregisteredClientSupport')
         ;
 
@@ -61,7 +60,6 @@ class ApplicationDomainTest extends PHPUnit_Framework_TestCase
 
         $application = (new Application())
             ->setId(42)
-            ->setType($applicationType)
             ->setSupport($applicationSupport)
         ;
 
