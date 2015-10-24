@@ -1,3 +1,11 @@
 services:
     link_value_mobile_notif.mobile_notif:
         class: LinkValue\MobileNotifBundle\MobileNotif
+    link_value_mobile_notif.notif_profiler:
+        class: LinkValue\MobileNotifBundle\Profiler\NotifProfiler
+        arguments: [@debug.stopwatch]
+    link_value_mobile_notif.notif_data_collector:
+        class: LinkValue\MobileNotifBundle\DataCollector\NotifDataCollector
+        arguments: [@link_value_mobile_notif.notif_profiler]
+        tags:
+            - { name: data_collector, template: "LinkValueMobileNotifBundle:Toolbar:notif", id: "notif" }
