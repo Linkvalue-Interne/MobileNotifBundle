@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
                                         ->addDefaultsIfNotSet()
                                         ->children()
                                             ->scalarNode("logger")->isRequired()->defaultValue("logger")->end()
+                                            ->scalarNode("profiler")->isRequired()->defaultValue("linkvalue.mobilenotif.profiler.notif_profiler")->end()                                            
                                         ->end()
                                     ->end()
                                     ->arrayNode("params")

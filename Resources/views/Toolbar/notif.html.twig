@@ -1,0 +1,68 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <img width="20" height="28" alt="API" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAABv2AAAb9gEe4i4+AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAN5QTFRF////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbYVkxgAAAEl0Uk5TAAEHCg0PExQYGRobHSMkJSgrLDAxODpFSElMT1JVWGBlcIWIj5CTlZufoKGpqrK1uLq9x8vQ1NXW3N7g4uXo7u/w8fL4+vv8/mUrS7IAAAEQSURBVFjDY2BAAqyqZu6eOIGTkSwDfsBj40kAqOM3wBCPVlcIJYVPPxeSen15JODm6SnDbgUW18VngBSSAToSSABouxCDCVjcEp8Bcnh84GgBoe3INQAGCBpga40HOBNhgAA+BaqjBowaQA0DROTkpEkxgFcUJ2AjygAt3HlKbtSAUQNGDRg1gCQDNFxcIC0mdxd0IEtsmWgA0m/MyUAcwDSA3wMopMkE43ILCwuSZoAK0PmKFBTrzA6e9uKU1AsKnuZ8FFUspnosFNVMYkqMlFVtbKPV+1A1QFIAD9CmR2t9EBmgpgwHxmQZwIEQVx46BiB3+zyRynDk3rAlsR1PXECX7K6vJxFdX8o732R1/wEHDo1/TMZNIwAAAABJRU5ErkJggg==" />
+        <span class="sf-toolbar-status{% if collector.nbrerrors > 0 %} sf-toolbar-status-red{% elseif 20 < collector.nbrcall %} sf-toolbar-status-yellow{% endif %}">{{ collector.nbrcall }}</span>
+        {% if collector.nbrcall > 0 %}
+            <span class="sf-toolbar-info-piece-additional-detail">in {{ '%0.2f'|format(collector.totaltime) }} ms</span>
+        {% endif %}
+    {% endset %}
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Notif Push Calls</b>
+            <span>{{ collector.nbrcall }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Total time</b>
+            <span>{{ '%0.2f'|format(collector.totaltime) }} ms</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Memory Usage</b>
+            <span>{{ collector.memoryusage }} bytes</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Errors</b>
+            <span class="sf-toolbar-status sf-toolbar-status-{{ collector.nbrerrors > 0 ? 'red' : 'green' }}">{{ collector.nbrerrors }}</span>
+        </div>
+    {% endset %}
+    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon"><img width="20" height="28" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAABv2AAAb9gEe4i4+AAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAN5QTFRF////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbYVkxgAAAEl0Uk5TAAEHCg0PExQYGRobHSMkJSgrLDAxODpFSElMT1JVWGBlcIWIj5CTlZufoKGpqrK1uLq9x8vQ1NXW3N7g4uXo7u/w8fL4+vv8/mUrS7IAAAEQSURBVFjDY2BAAqyqZu6eOIGTkSwDfsBj40kAqOM3wBCPVlcIJYVPPxeSen15JODm6SnDbgUW18VngBSSAToSSABouxCDCVjcEp8Bcnh84GgBoe3INQAGCBpga40HOBNhgAA+BaqjBowaQA0DROTkpEkxgFcUJ2AjygAt3HlKbtSAUQNGDRg1gCQDNFxcIC0mdxd0IEtsmWgA0m/MyUAcwDSA3wMopMkE43ILCwuSZoAK0PmKFBTrzA6e9uKU1AsKnuZ8FFUspnosFNVMYkqMlFVtbKPV+1A1QFIAD9CmR2t9EBmgpgwHxmQZwIEQVx46BiB3+zyRynDk3rAlsR1PXECX7K6vJxFdX8o732R1/wEHDo1/TMZNIwAAAABJRU5ErkJggg==" alt="" /></span>
+        <strong>Push notification</strong>
+        <span class="count">
+            <span>{{ collector.nbrerrors }}</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Push notification calls detail</h2>
+
+    {% if collector.calls|length == 0 %}
+        <p><em>No calls profiled.</em></p>
+    {% else %}
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Message</th>
+                <th>Duration</th>
+                <th>Memory usage</th>
+                <th>Error message</th>
+            </tr>
+
+            {% for call in collector.calls %}
+                <tr {% if call.error == true %}style="color : red;font-weight: bold;"{% endif %}>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ call.message|slice(0,100)}}</td>
+                    <td>{{ call.duration }} ms</td>
+                    <td>{{ call.memory_use }} bytes</td>
+                    <td>{{ call.error_message|slice(0,255) }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
