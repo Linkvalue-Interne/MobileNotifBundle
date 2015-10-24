@@ -39,6 +39,7 @@ class LinkValueMobileNotifExtension extends Extension
                 foreach ($services as $service_id) {
                     $client->addArgument(new Reference($service_id));
                 }
+                $client->addArgument(new Reference('link_value_mobile_notif.notif_profiler'));
 
                 $client->addMethodCall('setUp', array($params));
 
