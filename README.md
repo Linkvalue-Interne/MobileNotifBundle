@@ -1,4 +1,4 @@
-# APNSBundle
+# MobileNotifBundle
 
 This bundle aim to provide push notification.
 
