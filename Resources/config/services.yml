@@ -1,11 +1,18 @@
+parameters:
+    linkvalue.mobilenotif.client.client_collection.class: LinkValue\MobileNotifBundle\Client\ClientCollection
+    linkvalue.mobilenotif.data_collector.notif_data_collector.class: LinkValue\MobileNotifBundle\DataCollector\NotifDataCollector
+    linkvalue.mobilenotif.profiler.notif_profiler.class: LinkValue\MobileNotifBundle\Profiler\NotifProfiler
+
 services:
-    link_value_mobile_notif.mobile_notif:
-        class: LinkValue\MobileNotifBundle\MobileNotif
-    link_value_mobile_notif.notif_profiler:
-        class: LinkValue\MobileNotifBundle\Profiler\NotifProfiler
+    linkvalue.mobilenotif.clients:
+        class: %linkvalue.mobilenotif.client.client_collection.class%
+
+    linkvalue.mobilenotif.profiler.notif_profiler:
+        class: %linkvalue.mobilenotif.profiler.notif_profiler.class%
         arguments: [@debug.stopwatch]
-    link_value_mobile_notif.notif_data_collector:
-        class: LinkValue\MobileNotifBundle\DataCollector\NotifDataCollector
-        arguments: [@link_value_mobile_notif.notif_profiler]
+
+    linkvalue.mobilenotif.data_collector.notif_data_collector:
+        class: %linkvalue.mobilenotif.data_collector.notif_data_collector.class%
+        arguments: [@linkvalue.mobilenotif.profiler.notif_profiler]
         tags:
             - { name: data_collector, template: "LinkValueMobileNotifBundle:Toolbar:notif", id: "notif" }

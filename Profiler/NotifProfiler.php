@@ -1,16 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bersiroth
- * Date: 24/10/2015
- * Time: 17:00
+
+/*
+ * This file is part of the MobileNotifBundle package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace LinkValue\MobileNotifBundle\Profiler;
 
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
-
+/**
+ * ClientCollection
+ *
+ * @package MobileNotifBundle
+ * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
+ * @author  Valentin Coulon <valentin.c0610@gmail.com>
+ */
 class NotifProfiler
 {
     /**

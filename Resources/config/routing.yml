@@ -1,3 +1,0 @@
-link_value_mobile_notif_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: LinkValueMobileNotifBundle:Default:index }

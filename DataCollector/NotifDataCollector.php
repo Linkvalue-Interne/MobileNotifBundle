@@ -1,10 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bersiroth
- * Date: 24/10/2015
- * Time: 16:36
+
+/*
+ * This file is part of the MobileNotifBundle package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 namespace LinkValue\MobileNotifBundle\DataCollector;
 
 use LinkValue\MobileNotifBundle\Profiler\NotifProfiler;
@@ -12,6 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
+/**
+ * ClientCollection
+ *
+ * @package MobileNotifBundle
+ * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
+ * @author  Valentin Coulon <valentin.c0610@gmail.com>
+ */
 class NotifDataCollector extends DataCollector
 {
     private $profiler;

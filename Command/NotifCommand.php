@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the MobileNotifBundle package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace LinkValue\MobileNotifBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -7,8 +14,15 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
+use LinkValue\MobileNotif\Model\Message;
 
+/**
+ * ClientCollection
+ *
+ * @package MobileNotifBundle
+ * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
+ * @author  Valentin Coulon <valentin.c0610@gmail.com>
+ */
 class NotifCommand extends ContainerAwareCommand
 {
     /**
@@ -32,17 +46,12 @@ class NotifCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $message = new MobileMessage();
+        $message = new Message();
         $message
-            ->setDeviceToken($input->getArgument('device'))
-            ->setMessage($input->getArgument('message'))
+            ->setToken($input->getArgument('device'))
+            ->setContent($input->getArgument('message'))
         ;
 
-        //$mobileNotif = $this->getContainer()->get('link_value_mobile_notif.mobile_notif');
-        //$mobileNotif->using($input->getArgument('client'));
-        //$mobileNotif->push($message);
-        //
-        $client = $this->getContainer()->get('link_value_mobile_notif.'.$input->getArgument('client'));
-        $client->push($message);
+        $this->getContainer()->get('linkvalue.mobilenotif.clients')->get($input->getArgument('client'))->push($message);
     }
 }

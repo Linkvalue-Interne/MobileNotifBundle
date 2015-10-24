@@ -1,4 +1,4 @@
-# APNSBundle
+# MobileNotifBundle
 
 This bundle aim to provide push notification.
 
@@ -38,6 +38,10 @@ public function registerBundles()
     );
 }
 ```
+
+##Documentation
+
+For installation and how to use the bundle refer to [Resources/doc/index.md](Resources/doc/index.md)
 
 ## Contributing
 
