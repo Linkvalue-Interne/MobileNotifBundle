@@ -27,7 +27,7 @@ class LinkValueMobileNotifExtension extends Extension
 
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
+        
         $this->loadClients($config);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -36,7 +36,7 @@ class LinkValueMobileNotifExtension extends Extension
 
     private function loadClients($config)
     {
-        $clientNamespace = "LinkValue\MobileNotifBundle\Client";
+        $clientNamespace = "LinkValue\MobileNotif\Client";
 
         foreach ($config["clients"] as $type => $clients) {
 

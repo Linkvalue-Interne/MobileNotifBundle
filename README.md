@@ -39,6 +39,10 @@ public function registerBundles()
 }
 ```
 
+##Documentation
+
+For installation and how to use the bundle refer to [Resources/doc/index.md](Resources/doc/index.md)
+
 ## Contributing
 
 This is an open source bundle. If you're submitting
