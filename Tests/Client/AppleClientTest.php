@@ -1,17 +1,25 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\Tests\Bridge\Mobile\IOs;
+/*
+ * This file is part of the MobileNotifBundle package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-use PHPUnit_Framework_TestCase;
-use LinkValue\MobileNotifBundle\Entity\MobileClient\MobileMessage;
-use LinkValue\MobileNotifBundle\Bridge\Mobile\IOs\AppleMobileClient;
+namespace LinkValue\MobileNotifBundle\Tests\Client;
+
+use LinkValue\MobileNotifBundle\Client\AppleClient;
+use LinkValue\MobileNotif\Model\Message;
 
 /**
- * Unit test class for AppleMobileClient.php.
+ * Unit test class for AppleClient class
  *
- * @see LinkValue\MobileNotifBundle\Bridge\Mobile\IOs\AppleMobileClient
+ * @package MobileNotifBundle
+ * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
+ * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
-class AppleMobileClientTest extends PHPUnit_Framework_TestCase
+class AppleClientTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
