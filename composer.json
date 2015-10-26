@@ -29,5 +29,6 @@
         "psr-4": {
             "LinkValue\\MobileNotifBundle\\": "."
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
