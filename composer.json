@@ -16,8 +16,8 @@
     ],
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/LinkValue/MobileNotif"
+            "type": "git",
+            "url": "https://github.com/LinkValue/MobileNotif.git"
         }
     ],
     "require": {
