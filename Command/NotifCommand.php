@@ -48,7 +48,7 @@ class NotifCommand extends ContainerAwareCommand
     {
         $message = new Message();
         $message
-            ->setToken($input->getArgument('device'))
+            ->addToken($input->getArgument('device'))
             ->setContent($input->getArgument('message'))
         ;
 
