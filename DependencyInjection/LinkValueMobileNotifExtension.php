@@ -44,7 +44,7 @@ class LinkValueMobileNotifExtension extends Extension
                 $services = isset($data['services']) ? $data['services'] : array();
                 $params = isset($data['params']) ? $data['params'] : array();
 
-                $clientClass = $type == "ios" ? "AppleClient" : "AndroidClient";
+                $clientClass = $type == "apple" ? "AppleClient" : "GcmClient";
 
                 $client = $this->container->register('linkvalue.mobilenotif.client.'.$name, $clientNamespace . "\\" . $clientClass);
 
