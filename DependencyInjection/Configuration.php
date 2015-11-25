@@ -6,7 +6,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files
+ * This is the class that validates and merges configuration from your app/config files.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->arrayNode("clients")
+                ->arrayNode('clients')
                     ->isRequired()
                     ->children()
                         ->append($this->addAppleClientsNode())
@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get apple clients node
+     * Get apple clients node.
      *
      * @return TreeBuilder
      */
@@ -46,21 +46,21 @@ class Configuration implements ConfigurationInterface
         $node = $builder->root('apple');
 
         $node
-            ->useAttributeAsKey("name")
+            ->useAttributeAsKey('name')
             ->prototype('array')
                 ->children()
-                    ->arrayNode("services")
+                    ->arrayNode('services')
                         ->addDefaultsIfNotSet()
                         ->children()
-                            ->scalarNode("logger")->isRequired()->defaultValue("logger")->end()
-                            ->scalarNode("profiler")->isRequired()->defaultValue("linkvalue.mobilenotif.profiler.notif_profiler")->end()
+                            ->scalarNode('logger')->isRequired()->defaultValue('logger')->end()
+                            ->scalarNode('profiler')->isRequired()->defaultValue('linkvalue.mobilenotif.profiler.notif_profiler')->end()
                         ->end()
                     ->end()
-                    ->arrayNode("params")
+                    ->arrayNode('params')
                         ->children()
-                            ->scalarNode("endpoint")->defaultValue("tls://gateway.sandbox.push.apple.com:2195")->end()
-                            ->scalarNode("ssl_pem_path")->isRequired()->cannotBeEmpty()->end()
-                            ->scalarNode("ssl_passphrase")->isRequired()->cannotBeEmpty()->end()
+                            ->scalarNode('endpoint')->defaultValue('tls://gateway.sandbox.push.apple.com:2195')->end()
+                            ->scalarNode('ssl_pem_path')->isRequired()->cannotBeEmpty()->end()
+                            ->scalarNode('ssl_passphrase')->isRequired()->cannotBeEmpty()->end()
                         ->end()
                     ->end()
                 ->end()
@@ -71,7 +71,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get Google Cloud Messaging clients node
+     * Get Google Cloud Messaging clients node.
      *
      * @return TreeBuilder
      */
@@ -81,20 +81,20 @@ class Configuration implements ConfigurationInterface
         $node = $builder->root('gcm');
 
         $node
-            ->useAttributeAsKey("name")
+            ->useAttributeAsKey('name')
             ->prototype('array')
                 ->children()
-                    ->arrayNode("services")
+                    ->arrayNode('services')
                         ->addDefaultsIfNotSet()
                         ->children()
-                            ->scalarNode("logger")->isRequired()->defaultValue("logger")->end()
-                            ->scalarNode("profiler")->isRequired()->defaultValue("linkvalue.mobilenotif.profiler.notif_profiler")->end()
+                            ->scalarNode('logger')->isRequired()->defaultValue('logger')->end()
+                            ->scalarNode('profiler')->isRequired()->defaultValue('linkvalue.mobilenotif.profiler.notif_profiler')->end()
                         ->end()
                     ->end()
-                    ->arrayNode("params")
+                    ->arrayNode('params')
                         ->children()
-                            ->scalarNode("endpoint")->defaultValue("https://android.googleapis.com/gcm/send")->end()
-                            ->scalarNode("api_access_key")->isRequired()->cannotBeEmpty()->end()
+                            ->scalarNode('endpoint')->defaultValue('https://android.googleapis.com/gcm/send')->end()
+                            ->scalarNode('api_access_key')->isRequired()->cannotBeEmpty()->end()
                         ->end()
                     ->end()
                 ->end()

@@ -15,9 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
- * ClientCollection
+ * ClientCollection.
  *
- * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
@@ -34,8 +33,8 @@ class NotifDataCollector extends DataCollector
     }
 
     /**
-     * @param Request $request
-     * @param Response $response
+     * @param Request         $request
+     * @param Response        $response
      * @param \Exception|null $exception
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
@@ -67,9 +66,10 @@ class NotifDataCollector extends DataCollector
         $errors = 0;
         foreach ($this->data['notif'] as $call) {
             if ($call['error'] == true) {
-                $errors++;
+                ++$errors;
             }
         }
+
         return $errors;
     }
 

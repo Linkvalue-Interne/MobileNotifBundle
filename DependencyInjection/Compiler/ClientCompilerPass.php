@@ -16,7 +16,6 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Collect all mobile clients and store them into ClientCollection.
  *
- * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */

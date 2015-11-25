@@ -10,18 +10,15 @@
 namespace LinkValue\MobileNotifBundle\Tests\Client;
 
 use LinkValue\MobileNotifBundle\Client\AppleClient;
-use LinkValue\MobileNotif\Model\Message;
 
 /**
- * Unit test class for AppleClient class
+ * Unit test class for AppleClient class.
  *
- * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
 class AppleClientTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * tests push() method throws an exception when an inexisting ssl bundle is given.
      */
@@ -33,7 +30,7 @@ class AppleClientTest extends \PHPUnit_Framework_TestCase
             ->setUp([
                 'endpoint' => 'http://apple-push.com/endpoint',
                 'ssl_pem' => '/this/file/probably/doesnt/exists/bundle.pem',
-                'passphrase' => 'random passphrase'
+                'passphrase' => 'random passphrase',
             ])
         ;
     }
@@ -54,7 +51,7 @@ class AppleClientTest extends \PHPUnit_Framework_TestCase
         $mobileClient->setUp([
                 'endpoint' => 'http://random-apple-push.com/endpoint',
                 'ssl_pem' => __FILE__,
-                'passphrase' => 'random passphrase'
+                'passphrase' => 'random passphrase',
             ])
         ;
         $mobileClient->push($message);
