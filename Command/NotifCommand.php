@@ -13,13 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use LinkValue\MobileNotif\Model\Message;
 
 /**
- * ClientCollection
+ * ClientCollection.
  *
- * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
@@ -48,8 +46,8 @@ class NotifCommand extends ContainerAwareCommand
     {
         $message = new Message();
         $message
-            ->setToken($input->getArgument('device'))
-            ->setContent($input->getArgument('message'))
+            ->addToken($input->getArgument('device'))
+            ->setBody($input->getArgument('message'))
         ;
 
         $this->getContainer()->get('linkvalue.mobilenotif.clients')->get($input->getArgument('client'))->push($message);

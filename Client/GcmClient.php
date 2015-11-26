@@ -13,17 +13,17 @@ use Psr\Log\LoggerInterface;
 use LinkValue\MobileNotif\Exception\PushException;
 use LinkValue\MobileNotif\Model\Message;
 use LinkValue\MobileNotifBundle\Profiler\NotifProfiler;
-use LinkValue\MobileNotif\Client\AppleClient as BaseAppleClient;
+use LinkValue\MobileNotif\Client\GcmClient as BaseGcmClient;
 
 /**
  * MobileNotifBundle
- * Apple Push Notification services implementation.
+ * Google Cloud Messaging implementation.
  *
  * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
-class AppleClient implements BaseAppleClient
+class GcmClient implements BaseGcmClient
 {
     /**
      * @var NotifProfiler $notifProfiler
@@ -31,7 +31,7 @@ class AppleClient implements BaseAppleClient
     protected $notifProfiler;
 
     /**
-     * ApplePushNotificationClient constructor.
+     * AndroidPushNotificationClient constructor.
      *
      * @param LoggerInterface $logger
      * @param NotifProfiler $notifProfiler
@@ -52,7 +52,7 @@ class AppleClient implements BaseAppleClient
     {
         try {
 
-            $profilingEvent = $this->notifProfiler->startProfiling('APPLE: ' . $message->getContent());
+            $profilingEvent = $this->notifProfiler->startProfiling('GCM: ' . $message->getContent());
 
             parent::push($message);
 

@@ -6,11 +6,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
@@ -38,15 +37,14 @@ class LinkValueMobileNotifExtension extends Extension
     {
         $clientNamespace = "LinkValue\MobileNotif\Client";
 
-        foreach ($config["clients"] as $type => $clients) {
-
+        foreach ($config['clients'] as $type => $clients) {
             foreach ($clients as $name => $data) {
                 $services = isset($data['services']) ? $data['services'] : array();
                 $params = isset($data['params']) ? $data['params'] : array();
 
-                $clientClass = $type == "ios" ? "AppleClient" : "AndroidClient";
+                $clientClass = $type == 'apple' ? 'AppleClient' : 'GcmClient';
 
-                $client = $this->container->register('linkvalue.mobilenotif.client.'.$name, $clientNamespace . "\\" . $clientClass);
+                $client = $this->container->register('linkvalue.mobilenotif.client.'.$name, $clientNamespace.'\\'.$clientClass);
 
                 foreach ($services as $service_id) {
                     $client->addArgument(new Reference($service_id));

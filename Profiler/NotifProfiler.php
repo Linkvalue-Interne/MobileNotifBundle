@@ -11,10 +11,10 @@ namespace LinkValue\MobileNotifBundle\Profiler;
 
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
+
 /**
- * ClientCollection
+ * ClientCollection.
  *
- * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
@@ -40,6 +40,7 @@ class NotifProfiler
 
     /**
      * @param $message
+     *
      * @return StopwatchEvent
      */
     public function startProfiling($message)
@@ -76,7 +77,7 @@ class NotifProfiler
 
         $this->calls[$this->counter] = array_merge($this->calls[$this->counter], $values);
 
-        $this->counter++;
+        ++$this->counter;
     }
 
     /**
