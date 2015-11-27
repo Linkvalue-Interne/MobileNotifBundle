@@ -26,7 +26,7 @@ class ClientCollection extends ArrayCollection
      *
      * @return ClientCollection
      *
-     * @throws InvalidArgumentException if the key is not a String
+     * @throws \InvalidArgumentException if the key is not a String
      */
     public function addClient($key, ClientInterface $client)
     {

@@ -10,7 +10,6 @@
 namespace LinkValue\MobileNotifBundle\Client;
 
 use Psr\Log\LoggerInterface;
-use LinkValue\MobileNotif\Exception\PushException;
 use LinkValue\MobileNotif\Model\Message;
 use LinkValue\MobileNotifBundle\Profiler\NotifProfiler;
 use LinkValue\MobileNotif\Client\GcmClient as BaseGcmClient;
@@ -23,7 +22,7 @@ use LinkValue\MobileNotif\Client\GcmClient as BaseGcmClient;
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
-class GcmClient implements BaseGcmClient
+class GcmClient extends BaseGcmClient
 {
     /**
      * @var NotifProfiler $notifProfiler
@@ -47,26 +46,26 @@ class GcmClient implements BaseGcmClient
      * Push a notification to a mobile client.
      *
      * @param Message $message
+     * @throws \Exception
      */
     public function push(Message $message)
     {
+        $profilingEvent = $this->notifProfiler->startProfiling('GCM: ' . $message->getContent());
+
         try {
-
-            $profilingEvent = $this->notifProfiler->startProfiling('GCM: ' . $message->getContent());
-
             parent::push($message);
 
             $this->notifProfiler->stopProfiling($profilingEvent, array(
                 'error' => false,
                 'error_message' => null,
-            );
+            ));
 
         } catch (\exception $e) {
 
             $this->notifProfiler->stopProfiling($profilingEvent, array(
                 'error' => true,
                 'error_message' => $e->getMessage(),
-            );
+            ));
 
             throw $e;
         }
