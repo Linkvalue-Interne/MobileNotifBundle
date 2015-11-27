@@ -25,7 +25,8 @@ class ClientCollectionTest extends \PHPUnit_Framework_TestCase
     public function testAddClient()
     {
         $clientCollection = new ClientCollection();
-        $testClient = new TestClient();
+        /** @var ClientInterface $testClient */
+        $testClient = $this->getMock('LinkValue\MobileNotif\Client\ClientInterface');
         $clientCollection->addClient('test', $testClient);
         $this->assertEquals($testClient, $clientCollection->get('test'));
     }
@@ -34,33 +35,18 @@ class ClientCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $clientCollection = new ClientCollection();
         $this->setExpectedException('\InvalidArgumentException');
-        $clientCollection->addClient(42, new TestClient());
+        /** @var ClientInterface $testClient */
+        $testClient = $this->getMock('LinkValue\MobileNotif\Client\ClientInterface');
+        $clientCollection->addClient(42, $testClient);
     }
 
     public function testAddClientTwice()
     {
         $clientCollection = new ClientCollection();
-        $testClient = new TestClient();
+        /** @var ClientInterface $testClient */
+        $testClient = $this->getMock('LinkValue\MobileNotif\Client\ClientInterface');
         $clientCollection->addClient('test', $testClient);
         $this->setExpectedException('\RuntimeException');
         $clientCollection->addClient('test', $testClient);
     }
-}
-
-class TestClient implements ClientInterface
-{
-    /**
-     * @inheritDoc
-     */
-    public function setUp(array $params)
-    {
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function push(Message $message)
-    {
-    }
-
 }
