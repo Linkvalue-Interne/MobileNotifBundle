@@ -1,7 +1,7 @@
 {
     "name": "linkvalue/mobile-notif-bundle",
     "description": "Push notification on your mobile notifications",
-    "keywords": ["push notification", "mobile", "android", "ios", "notification"],
+    "keywords": ["push notification", "mobile", "android", "ios", "notification", "push"],
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
@@ -12,6 +12,10 @@
         {
             "name": "Jamal Youssefi",
             "email": "jamal.youssefi@gmail.com"
+        },
+        {
+            "name": "Raphael De Freitas",
+            "email": "raphael@de-freitas.net"
         }
     ],
     "repositories": [
@@ -21,9 +25,15 @@
         }
     ],
     "require": {
-        "php": ">=5.6.0",
-        "symfony/framework-bundle": ">=2.7",
-        "linkvalue/mobile-notif": "dev-master"
+        "php": ">=5.3.0",
+        "linkvalue/mobile-notif": "dev-master",
+        "symfony/framework-bundle": "^2.7",
+        "doctrine/collections": "^1.3",
+        "symfony/console": "^2.7",
+        "psr/log": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
     },
     "autoload": {
         "psr-4": {
