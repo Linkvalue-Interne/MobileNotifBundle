@@ -13,28 +13,31 @@ use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
- * ClientCollection.
+ * ClientProfiler.
  *
+ * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
-class NotifProfiler
+class ClientProfiler implements ClientProfilerInterface
 {
     /**
      * @var array
      */
-    private $calls = array();
+    private $calls;
 
     /**
      * @var int
      */
-    private $counter = 0;
+    private $counter;
 
     /**
      * @param Stopwatch $stopwatch
      */
     public function __construct(Stopwatch $stopwatch)
     {
+        $this->calls = array();
+        $this->counter = 0;
         $this->stopwatch = $stopwatch;
     }
 
@@ -86,13 +89,5 @@ class NotifProfiler
     public function getCalls()
     {
         return $this->calls;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNbCall()
-    {
-        return $this->counter;
     }
 }

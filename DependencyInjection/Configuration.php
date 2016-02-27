@@ -6,9 +6,7 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files.
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
+ * This is the class that validates and merges configuration from app/config files.
  */
 class Configuration implements ConfigurationInterface
 {
@@ -25,7 +23,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('clients')
                     ->isRequired()
                     ->children()
-                        ->append($this->addAppleClientsNode())
+                        ->append($this->addApnsClientsNode())
                         ->append($this->addGcmClientsNode())
                     ->end()
                 ->end()
@@ -36,14 +34,14 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get apple clients node.
+     * Add APNS clients node.
      *
-     * @return TreeBuilder
+     * @return \Symfony\Component\Config\Definition\Builder\NodeDefinition
      */
-    protected function addAppleClientsNode()
+    private function addApnsClientsNode()
     {
         $builder = new TreeBuilder();
-        $node = $builder->root('apple');
+        $node = $builder->root('apns');
 
         $node
             ->useAttributeAsKey('name')
@@ -52,15 +50,15 @@ class Configuration implements ConfigurationInterface
                     ->arrayNode('services')
                         ->addDefaultsIfNotSet()
                         ->children()
-                            ->scalarNode('logger')->isRequired()->defaultValue('logger')->end()
-                            ->scalarNode('profiler')->isRequired()->defaultValue('linkvalue.mobilenotif.profiler.notif_profiler')->end()
+                            ->scalarNode('logger')->defaultValue('logger')->end()
+                            ->scalarNode('profiler')->defaultValue('link_value_mobile_notif.profiler.client_profiler')->end()
                         ->end()
                     ->end()
                     ->arrayNode('params')
                         ->children()
-                            ->scalarNode('endpoint')->defaultValue('tls://gateway.sandbox.push.apple.com:2195')->end()
-                            ->scalarNode('ssl_pem_path')->isRequired()->cannotBeEmpty()->end()
-                            ->scalarNode('ssl_passphrase')->isRequired()->cannotBeEmpty()->end()
+                            ->scalarNode('endpoint')->cannotBeEmpty()->defaultValue('tls://gateway.sandbox.push.apple.com:2195')->end()
+                            ->scalarNode('ssl_pem_path')->cannotBeEmpty()->isRequired()->end()
+                            ->scalarNode('ssl_passphrase')->cannotBeEmpty()->end()
                         ->end()
                     ->end()
                 ->end()
@@ -71,11 +69,11 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get Google Cloud Messaging clients node.
+     * Add Google Cloud Messaging clients node.
      *
-     * @return TreeBuilder
+     * @return \Symfony\Component\Config\Definition\Builder\NodeDefinition
      */
-    protected function addGcmClientsNode()
+    private function addGcmClientsNode()
     {
         $builder = new TreeBuilder();
         $node = $builder->root('gcm');
@@ -87,14 +85,14 @@ class Configuration implements ConfigurationInterface
                     ->arrayNode('services')
                         ->addDefaultsIfNotSet()
                         ->children()
-                            ->scalarNode('logger')->isRequired()->defaultValue('logger')->end()
-                            ->scalarNode('profiler')->isRequired()->defaultValue('linkvalue.mobilenotif.profiler.notif_profiler')->end()
+                            ->scalarNode('logger')->defaultValue('logger')->end()
+                            ->scalarNode('profiler')->defaultValue('link_value_mobile_notif.profiler.client_profiler')->end()
                         ->end()
                     ->end()
                     ->arrayNode('params')
                         ->children()
-                            ->scalarNode('endpoint')->defaultValue('https://android.googleapis.com/gcm/send')->end()
-                            ->scalarNode('api_access_key')->isRequired()->cannotBeEmpty()->end()
+                            ->scalarNode('endpoint')->cannotBeEmpty()->defaultValue('https://android.googleapis.com/gcm/send')->end()
+                            ->scalarNode('api_access_key')->cannotBeEmpty()->isRequired()->end()
                         ->end()
                     ->end()
                 ->end()

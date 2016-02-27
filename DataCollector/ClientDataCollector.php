@@ -9,27 +9,39 @@
 
 namespace LinkValue\MobileNotifBundle\DataCollector;
 
-use LinkValue\MobileNotifBundle\Profiler\NotifProfiler;
+use LinkValue\MobileNotifBundle\Profiler\ClientProfilerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
- * ClientCollection.
+ * ClientDataCollector.
  *
+ * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
-class NotifDataCollector extends DataCollector
+class ClientDataCollector extends DataCollector
 {
+    /**
+     * @var ClientProfilerInterface
+     */
     private $profiler;
 
     /**
-     * @param NotifProfiler $profiler
+     * @param ClientProfilerInterface $profiler
      */
-    public function __construct(NotifProfiler $profiler)
+    public function __construct(ClientProfilerInterface $profiler)
     {
         $this->profiler = $profiler;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'link_value_mobile_notif';
     }
 
     /**
@@ -39,7 +51,7 @@ class NotifDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->data['notif'] = $this->profiler->getCalls();
+        $this->data['push_calls'] = $this->profiler->getCalls();
     }
 
     /**
@@ -47,24 +59,24 @@ class NotifDataCollector extends DataCollector
      */
     public function getCalls()
     {
-        return $this->data['notif'];
+        return $this->data['push_calls'];
     }
 
     /**
      * @return int
      */
-    public function getNbrCall()
+    public function getCountCalls()
     {
-        return count($this->data['notif']);
+        return count($this->data['push_calls']);
     }
 
     /**
      * @return int
      */
-    public function getNbrErrors()
+    public function getCountErrors()
     {
         $errors = 0;
-        foreach ($this->data['notif'] as $call) {
+        foreach ($this->data['push_calls'] as $call) {
             if ($call['error'] == true) {
                 ++$errors;
             }
@@ -79,28 +91,23 @@ class NotifDataCollector extends DataCollector
     public function getTotalTime()
     {
         $time = 0;
-        foreach ($this->data['notif'] as $call) {
+        foreach ($this->data['push_calls'] as $call) {
             $time += $call['duration'];
         }
 
         return $time;
     }
 
+    /**
+     * @return int
+     */
     public function getMemoryUsage()
     {
         $memory = 0;
-        foreach ($this->data['notif'] as $call) {
+        foreach ($this->data['push_calls'] as $call) {
             $memory += $call['memory_use'];
         }
 
         return $memory;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'notif';
     }
 }

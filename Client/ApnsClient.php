@@ -9,19 +9,19 @@
 
 namespace LinkValue\MobileNotifBundle\Client;
 
-use LinkValue\MobileNotif\Client\GcmClient as BaseGcmClient;
+use LinkValue\MobileNotif\Client\ApnsClient as BaseApnsClient;
 use LinkValue\MobileNotif\Model\Message;
 use LinkValue\MobileNotifBundle\Profiler\ClientProfilableTrait;
 use LinkValue\MobileNotifBundle\Profiler\NullClientProfiler;
 
 /**
- * Google Cloud Messaging implementation.
+ * Apple Push Notification Service client implementation.
  *
  * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
-class GcmClient extends BaseGcmClient
+class ApnsClient extends BaseApnsClient
 {
     use ClientProfilableTrait;
 
@@ -44,7 +44,7 @@ class GcmClient extends BaseGcmClient
      */
     public function push(Message $message)
     {
-        $profilingEvent = $this->clientProfiler->startProfiling(sprintf('GcmClient::push(%s)', $message->getPayloadAsJson()));
+        $profilingEvent = $this->clientProfiler->startProfiling(sprintf('ApnsClient::push(%s)', $message->getPayloadAsJson()));
 
         try {
             parent::push($message);

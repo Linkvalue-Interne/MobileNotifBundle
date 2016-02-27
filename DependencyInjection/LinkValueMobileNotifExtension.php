@@ -9,51 +9,57 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * This is the class that loads and manages your bundle configuration.
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ * This is the class that loads and manages LinkValueMobileNotifBundle configuration.
  */
 class LinkValueMobileNotifExtension extends Extension
 {
-    private $container;
-
     /**
      * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $this->container = $container;
-
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $this->loadClients($config);
+        $this->registerClients($config, $container);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 
-    private function loadClients($config)
+    /**
+     * Register each client as service, such as "link_value_mobile_notif.clients.the_client_type.my_custom_client_name"
+     *
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    private function registerClients(array $config, ContainerBuilder $container)
     {
-        $clientNamespace = "LinkValue\MobileNotif\Client";
+        foreach ($config['clients'] as $clientType => $clients) {
+            $clientFQCN = ($clientType == 'apns') ? 'LinkValue\MobileNotifBundle\Client\ApnsClient' : 'LinkValue\MobileNotifBundle\Client\GcmClient';
 
-        foreach ($config['clients'] as $type => $clients) {
-            foreach ($clients as $name => $data) {
-                $services = isset($data['services']) ? $data['services'] : array();
-                $params = isset($data['params']) ? $data['params'] : array();
+            foreach ($clients as $clientName => $clientConfig) {
+                $params = isset($clientConfig['params']) ? $clientConfig['params'] : array();
+                $services = isset($clientConfig['services']) ? $clientConfig['services'] : array();
 
-                $clientClass = $type == 'apple' ? 'AppleClient' : 'GcmClient';
+                // The final client name is a concatenation of the client type (apns/gcm) and the client name (defined by user) separated by a point '.'
+                $clientName = sprintf('%s.%s', $clientType, $clientName);
 
-                $client = $this->container->register('linkvalue.mobilenotif.client.'.$name, $clientNamespace.'\\'.$clientClass);
+                // Register client with required stuff
+                $client = $container->register(sprintf('link_value_mobile_notif.clients.%s', $clientName), $clientFQCN)
+                    ->addMethodCall('setUp', array($params))
+                    ->addTag('link_value_mobile_notif.client', array('name' => $clientName))
+                ;
 
-                foreach ($services as $service_id) {
-                    $client->addArgument(new Reference($service_id));
+                // Set optional logger
+                if(!empty($services['logger'])) {
+                    $client->addMethodCall('setLogger', array(new Reference($services['logger'])));
                 }
 
-                $client
-                    ->addMethodCall('setUp', array($params))
-                    ->addTag('link_value_mobile_notif.client', array('key' => $name))
-                ;
+                // Set optional profiler
+                if(!empty($services['profiler'])) {
+                    $client->addMethodCall('setClientProfiler', array(new Reference($services['profiler'])));
+                }
             }
         }
     }

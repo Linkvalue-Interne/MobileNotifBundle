@@ -16,28 +16,32 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Collect all mobile clients and store them into ClientCollection.
  *
+ * @package MobileNotifBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
-class ClientCompilerPass implements CompilerPassInterface
+class ClientCollectorPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('linkvalue.mobilenotif.clients')) {
+        if (!$container->hasDefinition('link_value_mobile_notif.clients')) {
             return;
         }
 
-        $clientCollection = $container->getDefinition('linkvalue.mobilenotif.clients');
-        $tagged = $container->findTaggedServiceIds('link_value_mobile_notif.client');
+        $clientCollectionService = $container->getDefinition('link_value_mobile_notif.clients');
+        $taggedClientServices = $container->findTaggedServiceIds('link_value_mobile_notif.client');
 
-        foreach ($tagged as $serviceId => $attributes) {
+        foreach ($taggedClientServices as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
-                if (empty($attribute['key'])) {
-                    throw new \InvalidArgumentException(sprintf('"link_value_mobile_notif.client" tag must define "key" key.'));
+                if (empty($attribute['name'])) {
+                    throw new \InvalidArgumentException('"link_value_mobile_notif.client" tag must define "name" key.');
                 }
 
-                $clientCollection->addMethodCall('addClient', array(
-                    $attribute['key'],
+                $clientCollectionService->addMethodCall('addClient', array(
+                    $attribute['name'],
                     new Reference($serviceId),
                 ));
             }

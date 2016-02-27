@@ -1,18 +1,20 @@
 parameters:
-    linkvalue.mobilenotif.client.client_collection.class: LinkValue\MobileNotifBundle\Client\ClientCollection
-    linkvalue.mobilenotif.data_collector.notif_data_collector.class: LinkValue\MobileNotifBundle\DataCollector\NotifDataCollector
-    linkvalue.mobilenotif.profiler.notif_profiler.class: LinkValue\MobileNotifBundle\Profiler\NotifProfiler
+    link_value_mobile_notif.client.client_collection.class:             'LinkValue\MobileNotifBundle\Client\ClientCollection'
+    link_value_mobile_notif.profiler.client_profiler.class:             'LinkValue\MobileNotifBundle\Profiler\ClientProfiler'
+    link_value_mobile_notif.data_collector.client_data_collector.class: 'LinkValue\MobileNotifBundle\DataCollector\NotifDataCollector'
 
 services:
-    linkvalue.mobilenotif.clients:
-        class: %linkvalue.mobilenotif.client.client_collection.class%
+    link_value_mobile_notif.clients:
+        class:     '%link_value_mobile_notif.client.client_collection.class%'
 
-    linkvalue.mobilenotif.profiler.notif_profiler:
-        class: %linkvalue.mobilenotif.profiler.notif_profiler.class%
-        arguments: [@debug.stopwatch]
+    link_value_mobile_notif.profiler.client_profiler:
+        class:     '%link_value_mobile_notif.profiler.client_profiler.class%'
+        arguments: [ '@debug.stopwatch' ]
 
-    linkvalue.mobilenotif.data_collector.notif_data_collector:
-        class: %linkvalue.mobilenotif.data_collector.notif_data_collector.class%
-        arguments: [@linkvalue.mobilenotif.profiler.notif_profiler]
+    link_value_mobile_notif.data_collector.client_data_collector:
+        class:     '%link_value_mobile_notif.data_collector.client_data_collector.class%'
+        arguments: [ '@link_value_mobile_notif.profiler.client_profiler' ]
         tags:
-            - { name: data_collector, template: "LinkValueMobileNotifBundle:Toolbar:notif", id: "notif" }
+            -   name:     'data_collector'
+                id:       'link_value_mobile_notif'
+                template: 'LinkValueMobileNotifBundle:Toolbar:client_data_collector.html'
