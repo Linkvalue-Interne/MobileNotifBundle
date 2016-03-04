@@ -1,54 +1,25 @@
 # MobileNotifBundle
 
-This bundle aim to provide push notification.
+[![Build Status](https://travis-ci.org/LinkValue/MobileNotifBundle.svg?branch=master)](https://travis-ci.org/LinkValue/MobileNotifBundle)
+[![Code Coverage](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/?branch=master)
 
-#####THIS BUNDLE IS IN DEVELOPMENT
+[Symfony](https://symfony.com/) bundle to send notifications to mobile devices.
 
-## Installation
-
-This bundle can be installed using composer by adding the following in the require section of your composer.json file:
-
-```
-"require": {
-        ...
-        "linkvalue/mobile-notif-bundle": "dev-master"
-    },
-```
-
-Or with composer cli:
-
-```
-composer require linkvalue/mobile-notif-bundle
-```
-
-And after installed the bundle, you must register it in your kernel:
-
-```
-<?php
-
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = array(
-
-        // ...
-
-        new LinkValue\MobileNotifBundle\LinkValueMobileNotifBundle()
-    );
-}
-```
-
-##Documentation
-
-For installation and how to use the bundle refer to [Resources/doc/index.md](Resources/doc/index.md)
-
-## Contributing
-
-This is an open source bundle. If you're submitting
-a pull request, please follow the symfony guidelines in the [Submitting a Patch][1] section
-and use [Pull Request Template][2].
+This is the official Symfony bundle implementation of [LinkValue/MobileNotif](https://github.com/LinkValue/MobileNotif) library. More information of the library itself can be found there.
 
 
-[1]: https://symfony.com/doc/current/contributing/code/patches.html#check-list
-[2]: https://symfony.com/doc/current/contributing/code/patches.html#make-a-pull-request
+
+## Documentation
+
+To get started, please refer to the [documentation index](Resources/doc/README.md).
+
+
+
+## License
+
+**MIT**
+
+This open source bundle is provide (with :heart: love :heart:) by [LinkValue](http://link-value.fr).
+
+More information in the LICENSE file.

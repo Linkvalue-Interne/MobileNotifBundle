@@ -4,7 +4,7 @@ namespace LinkValue\MobileNotifBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use LinkValue\MobileNotifBundle\DependencyInjection\Compiler\ClientCompilerPass;
+use LinkValue\MobileNotifBundle\DependencyInjection\Compiler\ClientCollectorPass;
 
 class LinkValueMobileNotifBundle extends Bundle
 {
@@ -12,6 +12,6 @@ class LinkValueMobileNotifBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new ClientCompilerPass());
+        $container->addCompilerPass(new ClientCollectorPass());
     }
 }
