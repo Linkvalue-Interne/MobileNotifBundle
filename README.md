@@ -20,6 +20,6 @@ To get started, please refer to the [documentation index](Resources/doc/README.m
 
 **MIT**
 
-This open source bundle is provide (with :heart: love :heart:) by [LinkValue](http://link-value.fr).
+This open source bundle is provided (with :heart: love) by [LinkValue](http://link-value.fr).
 
 More information in the LICENSE file.
