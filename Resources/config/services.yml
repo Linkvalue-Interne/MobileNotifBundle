@@ -1,7 +1,7 @@
 parameters:
     link_value_mobile_notif.client.client_collection.class:             'LinkValue\MobileNotifBundle\Client\ClientCollection'
     link_value_mobile_notif.profiler.client_profiler.class:             'LinkValue\MobileNotifBundle\Profiler\ClientProfiler'
-    link_value_mobile_notif.data_collector.client_data_collector.class: 'LinkValue\MobileNotifBundle\DataCollector\NotifDataCollector'
+    link_value_mobile_notif.data_collector.client_data_collector.class: 'LinkValue\MobileNotifBundle\DataCollector\ClientDataCollector'
 
 services:
     link_value_mobile_notif.clients:
