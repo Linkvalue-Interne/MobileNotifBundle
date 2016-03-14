@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "linkvalue/mobile-notif": "^0.1",
+        "linkvalue/mobile-notif": "^0.2",
         "symfony/framework-bundle": "^2.7",
         "psr/log": "^1.0",
         "doctrine/collections": "^1.3",
