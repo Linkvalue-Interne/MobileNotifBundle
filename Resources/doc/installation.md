@@ -4,7 +4,7 @@ This bundle can be installed using composer by adding the following in the requi
 
 ```json
 "require": {
-    "linkvalue/mobile-notif-bundle": "^0.1"
+    "linkvalue/mobile-notif-bundle": "^0.2"
 },
 ```
 
