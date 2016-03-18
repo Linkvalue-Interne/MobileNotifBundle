@@ -17,4 +17,4 @@ services:
         tags:
             -   name:     'data_collector'
                 id:       'link_value_mobile_notif'
-                template: 'LinkValueMobileNotifBundle:Toolbar:client_data_collector.html'
+                template: 'LinkValueMobileNotifBundle:Toolbar:client_data_collector'
