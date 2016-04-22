@@ -1,4 +1,5 @@
-# MobileNotifBundle
+MobileNotifBundle
+=================
 
 [![Build Status](https://travis-ci.org/LinkValue/MobileNotifBundle.svg?branch=master)](https://travis-ci.org/LinkValue/MobileNotifBundle)
 [![Code Coverage](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/?branch=master)
