@@ -1,7 +1,7 @@
 parameters:
-    link_value_mobile_notif.client.client_collection.class:             'LinkValue\MobileNotifBundle\Client\ClientCollection'
-    link_value_mobile_notif.profiler.client_profiler.class:             'LinkValue\MobileNotifBundle\Profiler\ClientProfiler'
-    link_value_mobile_notif.data_collector.client_data_collector.class: 'LinkValue\MobileNotifBundle\DataCollector\ClientDataCollector'
+    link_value_mobile_notif.client.client_collection.class:             'LinkValue\JarvisBundle\Client\ClientCollection'
+    link_value_mobile_notif.profiler.client_profiler.class:             'LinkValue\JarvisBundle\Profiler\ClientProfiler'
+    link_value_mobile_notif.data_collector.client_data_collector.class: 'LinkValue\JarvisBundle\DataCollector\ClientDataCollector'
 
 services:
     link_value_mobile_notif.clients:
@@ -17,4 +17,4 @@ services:
         tags:
             -   name:     'data_collector'
                 id:       'link_value_mobile_notif'
-                template: 'LinkValueMobileNotifBundle:Toolbar:client_data_collector'
+                template: 'LinkValueJarvisBundle:Toolbar:client_data_collector'

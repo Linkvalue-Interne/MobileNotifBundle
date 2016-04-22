@@ -1,8 +1,8 @@
-# MobileNotifBundle
+# JarvisBundle
 
-[![Build Status](https://travis-ci.org/LinkValue/MobileNotifBundle.svg?branch=master)](https://travis-ci.org/LinkValue/MobileNotifBundle)
-[![Code Coverage](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LinkValue/MobileNotifBundle/?branch=master)
+[![Build Status](https://travis-ci.org/LinkValue/JarvisBundle.svg?branch=master)](https://travis-ci.org/LinkValue/JarvisBundle)
+[![Code Coverage](https://scrutinizer-ci.com/g/LinkValue/JarvisBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/LinkValue/JarvisBundle/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LinkValue/JarvisBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LinkValue/JarvisBundle/?branch=master)
 
 [Symfony](https://symfony.com/) bundle to send notifications to mobile devices.
 

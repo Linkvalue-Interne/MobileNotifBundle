@@ -23,7 +23,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new LinkValue\MobileNotifBundle\LinkValueMobileNotifBundle()
+        new LinkValue\JarvisBundle\LinkValueJarvisBundle()
     );
 }
 ```

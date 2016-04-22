@@ -1,20 +1,20 @@
 <?php
 
 /*
- * This file is part of the MobileNotifBundle package.
+ * This file is part of the JarvisBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace LinkValue\MobileNotifBundle\Profiler;
+namespace LinkValue\JarvisBundle\Profiler;
 
 use Symfony\Component\Stopwatch\StopwatchEvent;
 
 /**
  * ClientProfilerInterface.
  *
- * @package MobileNotifBundle
+ * @package JarvisBundle
  * @author Oliver Thebault <oliver.thebault@gmail.com>
  */
 interface ClientProfilerInterface

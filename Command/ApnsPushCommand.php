@@ -1,16 +1,16 @@
 <?php
 
 /*
- * This file is part of the MobileNotifBundle package.
+ * This file is part of the JarvisBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace LinkValue\MobileNotifBundle\Command;
+namespace LinkValue\JarvisBundle\Command;
 
 use LinkValue\MobileNotif\Model\ApnsMessage;
-use LinkValue\MobileNotifBundle\Client\ApnsClient;
+use LinkValue\JarvisBundle\Client\ApnsClient;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * ApnsPushCommand.
  *
- * @package MobileNotifBundle
+ * @package JarvisBundle
  * @author Oliver Thebault <oliver.thebault@gmail.com>
  */
 class ApnsPushCommand extends ContainerAwareCommand

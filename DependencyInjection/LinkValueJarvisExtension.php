@@ -1,6 +1,6 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\DependencyInjection;
+namespace LinkValue\JarvisBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -9,9 +9,9 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * This is the class that loads and manages LinkValueMobileNotifBundle configuration.
+ * This is the class that loads and manages LinkValueJarvisBundle configuration.
  */
-class LinkValueMobileNotifExtension extends Extension
+class LinkValueJarvisExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class LinkValueMobileNotifExtension extends Extension
     private function registerClients(array $config, ContainerBuilder $container)
     {
         foreach ($config['clients'] as $clientType => $clients) {
-            $clientFQCN = ($clientType == 'apns') ? 'LinkValue\MobileNotifBundle\Client\ApnsClient' : 'LinkValue\MobileNotifBundle\Client\GcmClient';
+            $clientFQCN = ($clientType == 'apns') ? 'LinkValue\JarvisBundle\Client\ApnsClient' : 'LinkValue\JarvisBundle\Client\GcmClient';
 
             foreach ($clients as $clientName => $clientConfig) {
                 $params = isset($clientConfig['params']) ? $clientConfig['params'] : array();

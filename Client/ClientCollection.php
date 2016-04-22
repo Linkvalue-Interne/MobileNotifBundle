@@ -1,13 +1,13 @@
 <?php
 
 /*
- * This file is part of the MobileNotifBundle package.
+ * This file is part of the JarvisBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace LinkValue\MobileNotifBundle\Client;
+namespace LinkValue\JarvisBundle\Client;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use LinkValue\MobileNotif\Client\ClientInterface;
@@ -15,7 +15,7 @@ use LinkValue\MobileNotif\Client\ClientInterface;
 /**
  * ClientCollection.
  *
- * @package MobileNotifBundle
+ * @package JarvisBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
