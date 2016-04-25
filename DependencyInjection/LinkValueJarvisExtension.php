@@ -28,7 +28,7 @@ class LinkValueJarvisExtension extends Extension
     }
 
     /**
-     * Register each client as service, such as "link_value_mobile_notif.clients.the_client_type.my_custom_client_name"
+     * Register each client as service, such as "link_value_jarvis.clients.the_client_type.my_custom_client_name"
      *
      * @param array $config
      * @param ContainerBuilder $container
@@ -46,9 +46,9 @@ class LinkValueJarvisExtension extends Extension
                 $clientName = sprintf('%s.%s', $clientType, $clientName);
 
                 // Register client with required stuff
-                $client = $container->register(sprintf('link_value_mobile_notif.clients.%s', $clientName), $clientFQCN)
+                $client = $container->register(sprintf('link_value_jarvis.clients.%s', $clientName), $clientFQCN)
                     ->addMethodCall('setUp', array($params))
-                    ->addTag('link_value_mobile_notif.client', array('name' => $clientName))
+                    ->addTag('link_value_jarvis.client', array('name' => $clientName))
                 ;
 
                 // Set optional logger

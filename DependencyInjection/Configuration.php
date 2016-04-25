@@ -16,7 +16,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('link_value_mobile_notif');
+        $rootNode = $treeBuilder->root('link_value_jarvis');
 
         $rootNode
             ->children()
@@ -51,7 +51,7 @@ class Configuration implements ConfigurationInterface
                         ->addDefaultsIfNotSet()
                         ->children()
                             ->scalarNode('logger')->defaultValue('logger')->end()
-                            ->scalarNode('profiler')->defaultValue('link_value_mobile_notif.profiler.client_profiler')->end()
+                            ->scalarNode('profiler')->defaultValue('link_value_jarvis.profiler.client_profiler')->end()
                         ->end()
                     ->end()
                     ->arrayNode('params')
@@ -86,7 +86,7 @@ class Configuration implements ConfigurationInterface
                         ->addDefaultsIfNotSet()
                         ->children()
                             ->scalarNode('logger')->defaultValue('logger')->end()
-                            ->scalarNode('profiler')->defaultValue('link_value_mobile_notif.profiler.client_profiler')->end()
+                            ->scalarNode('profiler')->defaultValue('link_value_jarvis.profiler.client_profiler')->end()
                         ->end()
                     ->end()
                     ->arrayNode('params')

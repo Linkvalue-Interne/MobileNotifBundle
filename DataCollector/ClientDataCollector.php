@@ -41,7 +41,7 @@ class ClientDataCollector extends DataCollector
      */
     public function getName()
     {
-        return 'link_value_mobile_notif';
+        return 'link_value_jarvis';
     }
 
     /**

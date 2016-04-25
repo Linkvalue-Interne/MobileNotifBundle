@@ -27,17 +27,17 @@ class ClientCollectorPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('link_value_mobile_notif.clients')) {
+        if (!$container->hasDefinition('link_value_jarvis.clients')) {
             return;
         }
 
-        $clientCollectionService = $container->getDefinition('link_value_mobile_notif.clients');
-        $taggedClientServices = $container->findTaggedServiceIds('link_value_mobile_notif.client');
+        $clientCollectionService = $container->getDefinition('link_value_jarvis.clients');
+        $taggedClientServices = $container->findTaggedServiceIds('link_value_jarvis.client');
 
         foreach ($taggedClientServices as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
                 if (empty($attribute['name'])) {
-                    throw new \InvalidArgumentException('"link_value_mobile_notif.client" tag must define "name" key.');
+                    throw new \InvalidArgumentException('"link_value_jarvis.client" tag must define "name" key.');
                 }
 
                 $clientCollectionService->addMethodCall('addClient', array(

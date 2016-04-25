@@ -1,20 +1,20 @@
 parameters:
-    link_value_mobile_notif.client.client_collection.class:             'LinkValue\JarvisBundle\Client\ClientCollection'
-    link_value_mobile_notif.profiler.client_profiler.class:             'LinkValue\JarvisBundle\Profiler\ClientProfiler'
-    link_value_mobile_notif.data_collector.client_data_collector.class: 'LinkValue\JarvisBundle\DataCollector\ClientDataCollector'
+    link_value_jarvis.client.client_collection.class:             'LinkValue\JarvisBundle\Client\ClientCollection'
+    link_value_jarvis.profiler.client_profiler.class:             'LinkValue\JarvisBundle\Profiler\ClientProfiler'
+    link_value_jarvis.data_collector.client_data_collector.class: 'LinkValue\JarvisBundle\DataCollector\ClientDataCollector'
 
 services:
-    link_value_mobile_notif.clients:
-        class:     '%link_value_mobile_notif.client.client_collection.class%'
+    link_value_jarvis.clients:
+        class:     '%link_value_jarvis.client.client_collection.class%'
 
-    link_value_mobile_notif.profiler.client_profiler:
-        class:     '%link_value_mobile_notif.profiler.client_profiler.class%'
+    link_value_jarvis.profiler.client_profiler:
+        class:     '%link_value_jarvis.profiler.client_profiler.class%'
         arguments: [ '@debug.stopwatch' ]
 
-    link_value_mobile_notif.data_collector.client_data_collector:
-        class:     '%link_value_mobile_notif.data_collector.client_data_collector.class%'
-        arguments: [ '@link_value_mobile_notif.profiler.client_profiler' ]
+    link_value_jarvis.data_collector.client_data_collector:
+        class:     '%link_value_jarvis.data_collector.client_data_collector.class%'
+        arguments: [ '@link_value_jarvis.profiler.client_profiler' ]
         tags:
             -   name:     'data_collector'
-                id:       'link_value_mobile_notif'
+                id:       'link_value_jarvis'
                 template: 'LinkValueJarvisBundle:Toolbar:client_data_collector'

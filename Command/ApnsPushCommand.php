@@ -31,7 +31,7 @@ class ApnsPushCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('link_value_mobile_notif:apns:push')
+            ->setName('link_value_jarvis:apns:push')
             ->setDescription('APNS Push notification command.')
             ->addArgument('token', InputArgument::REQUIRED, 'Token of the device which will receive the notification.')
             ->addArgument('message', InputArgument::REQUIRED, 'Notification message.')
@@ -50,7 +50,7 @@ class ApnsPushCommand extends ContainerAwareCommand
             ->addToken($token = $input->getArgument('token'))
         ;
 
-        $apnsClients = $this->getContainer()->get('link_value_mobile_notif.clients')->getApnsClients();
+        $apnsClients = $this->getContainer()->get('link_value_jarvis.clients')->getApnsClients();
 
         if ($apnsClients->count() == 0) {
             throw new \RuntimeException('You must configure at least one APNS client to be able to push messages with this command.');

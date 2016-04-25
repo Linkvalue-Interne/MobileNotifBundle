@@ -31,7 +31,7 @@ class GcmPushCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('link_value_mobile_notif:gcm:push')
+            ->setName('link_value_jarvis:gcm:push')
             ->setDescription('GCM Push notification command.')
             ->addArgument('token', InputArgument::REQUIRED, 'Token of the device which will receive the notification.')
             ->addArgument('message', InputArgument::REQUIRED, 'Notification message.')
@@ -52,7 +52,7 @@ class GcmPushCommand extends ContainerAwareCommand
             ->addToken($token = $input->getArgument('token'))
         ;
 
-        $gcmClients = $this->getContainer()->get('link_value_mobile_notif.clients')->getGcmClients();
+        $gcmClients = $this->getContainer()->get('link_value_jarvis.clients')->getGcmClients();
 
         if ($gcmClients->count() == 0) {
             throw new \RuntimeException('You must configure at least one GCM client to be able to push messages with this command.');
