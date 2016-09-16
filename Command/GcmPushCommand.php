@@ -48,7 +48,7 @@ class GcmPushCommand extends ContainerAwareCommand
         $message = (new GcmMessage())
             ->setNotificationBody($input->getArgument('message'))
             ->setNotificationTitle($input->getOption('title'))
-            ->setNotificationIcon($input->getOption('myicon'))
+            ->setNotificationIcon($input->getOption('icon'))
             ->addToken($token = $input->getArgument('token'))
         ;
 
