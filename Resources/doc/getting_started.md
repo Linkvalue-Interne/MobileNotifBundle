@@ -9,11 +9,6 @@ Before using this bundle, you need to feel comfortable with some words or expres
   - A `token` or `device token` is a string used to identify a device (mobile / tablet / etc.) on which is installed the targeted application. So you'll have to keep 1 token by device by application to be able to notify a specific user of your application.
   - [APNS specific vocabulary] A `certificate` or `certificate bundle` is a file which can be delivered by Apple (through the iOS developer center interface). It is often delivered as `.p12` format and must be converted to `.pem` format before you can pass it to `ssl_pem_path` configuration. The final certificate bundle PEM file should be composed of a "CERTIFICATE" and a "PRIVATE KEY" and it may require the use of a passphrase. Apple provides different certificates for development (sandbox) and production mode.
 
-### Transform your certificate .p12 into a .pem
-```
-$ openssl pkcs12 -in apns-dev-cert.p12 -out apns-dev-cert.pem -nodes -clcerts
-```
-
 ### Examples
 
 #### Push notification "Hello world!" using GCM
@@ -205,3 +200,9 @@ class MyController extends Controller
 }
 ```
 
+### Miscellaneous
+
+#### Transform your iOS certificate .p12 into a .pem
+```
+$ openssl pkcs12 -in apns-dev-cert.p12 -out apns-dev-cert.pem -nodes -clcerts
+```
