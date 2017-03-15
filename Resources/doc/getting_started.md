@@ -16,7 +16,7 @@ Before using this bundle, you need to feel comfortable with some words or expres
 ```yaml
 # app/config.yml
 
-link_value_mobile_notif:
+link_value_jarvis:
     clients:
         gcm:
             my_gcm_application:
@@ -27,7 +27,7 @@ link_value_mobile_notif:
 You can now try to push a notification with the following command:
 
 ```bash
-php bin/console link_value_mobile_notif:gcm:push "my_gcm_application_device_token" "Hello world!"
+php bin/console link_value_jarvis:gcm:push "my_gcm_application_device_token" "Hello world!"
 ```
 
 Note: If you're using Symfony 2.x, you may have to replace `bin/console` by `app/console`.
@@ -36,7 +36,7 @@ If you did not receive the notification on your device (corresponding to "my_gcm
 
 Now, let's send the same notification with your own code in a controller.
 
-To be able to use each configured client easily, each GCM client has its own service identified like this: `link_value_mobile_notif.clients.gcm.name_of_my_client`.
+To be able to use each configured client easily, each GCM client has its own service identified like this: `link_value_jarvis.clients.gcm.name_of_my_client`.
 
 ```php
 // src/AppBundle/Controller/MyController.php
@@ -57,7 +57,7 @@ class MyController extends Controller
             ->addToken('my_gcm_application_device_token')
         ;
         
-        $this->container->get('link_value_mobile_notif.clients.gcm.my_gcm_application')->push($message);
+        $this->container->get('link_value_jarvis.clients.gcm.my_gcm_application')->push($message);
         
         return new Response();
     }
@@ -71,7 +71,7 @@ class MyController extends Controller
 ```yaml
 # app/config.yml
 
-link_value_mobile_notif:
+link_value_jarvis:
     clients:
         apns:
             my_apns_application:
@@ -82,7 +82,7 @@ link_value_mobile_notif:
 You can now try to push a notification with the following command:
 
 ```bash
-php bin/console link_value_mobile_notif:apns:push "my_apns_application_device_token" "Hello world!"
+php bin/console link_value_jarvis:apns:push "my_apns_application_device_token" "Hello world!"
 ```
 
 Note: If you're using Symfony 2.x, you may have to replace `bin/console` by `app/console`.
@@ -91,7 +91,7 @@ If you did not receive the notification on your device (corresponding to "my_apn
 
 Now, let's send the same notification with your own code in a controller.
 
-To be able to use each configured client easily, each APNS client has its own service identified like this: `link_value_mobile_notif.clients.apns.name_of_my_client`.
+To be able to use each configured client easily, each APNS client has its own service identified like this: `link_value_jarvis.clients.apns.name_of_my_client`.
 
 ```php
 // src/AppBundle/Controller/MyController.php
@@ -110,7 +110,7 @@ class MyController extends Controller
             ->addToken('my_apns_application_device_token')
         ;
         
-        $this->container->get('link_value_mobile_notif.clients.apns.my_apns_application')->push($message);
+        $this->container->get('link_value_jarvis.clients.apns.my_apns_application')->push($message);
         
         return new Response();
     }
@@ -124,7 +124,7 @@ class MyController extends Controller
 ```yaml
 # app/config.yml
 
-link_value_mobile_notif:
+link_value_jarvis:
     clients:
         apns:
             apns_app1_dev:
@@ -144,7 +144,7 @@ link_value_mobile_notif:
                     api_access_key: 'my_google_cloud_messaging_api_key'
 ```
 
-To ease the handling of multiple clients, all clients are grouped in a ClientCollection (which extends Doctrine's ArrayCollection) accessible through the service `link_value_mobile_notif.clients`.
+To ease the handling of multiple clients, all clients are grouped in a ClientCollection (which extends Doctrine's ArrayCollection) accessible through the service `link_value_jarvis.clients`.
 
 ```php
 // src/AppBundle/Controller/MyController.php
@@ -159,7 +159,7 @@ class MyController extends Controller
 {
     public function pushHelloWorldAction()
     {
-        $clients = $this->container->get('link_value_mobile_notif.clients');
+        $clients = $this->container->get('link_value_jarvis.clients');
         
         // This message will be sent by APNS clients
         $apnsMessage = new ApnsMessage();

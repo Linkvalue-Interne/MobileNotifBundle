@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the MobileNotifBundle package.
+ * This file is part of the JarvisBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace LinkValue\MobileNotifBundle\DataCollector;
+namespace LinkValue\JarvisBundle\DataCollector;
 
-use LinkValue\MobileNotifBundle\Profiler\ClientProfilerInterface;
+use LinkValue\JarvisBundle\Profiler\ClientProfilerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 /**
  * ClientDataCollector.
  *
- * @package MobileNotifBundle
+ * @package JarvisBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */
@@ -41,7 +41,7 @@ class ClientDataCollector extends DataCollector
      */
     public function getName()
     {
-        return 'link_value_mobile_notif';
+        return 'link_value_jarvis';
     }
 
     /**

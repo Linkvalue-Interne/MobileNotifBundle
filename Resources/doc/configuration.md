@@ -3,7 +3,7 @@
 Configuration reference:
 
 ```yaml
-link_value_mobile_notif:
+link_value_jarvis:
     clients:
 
         # APNS configuration
@@ -32,7 +32,7 @@ link_value_mobile_notif:
                     # Logger service ID
                     logger: "my_custom_logger_service_id"
 
-                    # optional -> Default value is "link_value_mobile_notif.profiler.notif_profiler"
+                    # optional -> Default value is "link_value_jarvis.profiler.notif_profiler"
                     # Profiler service ID
                     profiler: "my_custom_profiler_service_id"
 
@@ -59,7 +59,7 @@ link_value_mobile_notif:
                     # Logger service ID
                     logger: "my_custom_logger_service_id"
 
-                    # optional -> Default value is "link_value_mobile_notif.profiler.notif_profiler"
+                    # optional -> Default value is "link_value_jarvis.profiler.notif_profiler"
                     # Profiler service ID
                     profiler: "my_custom_profiler_service_id"
 

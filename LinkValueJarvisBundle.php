@@ -1,12 +1,12 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle;
+namespace LinkValue\JarvisBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use LinkValue\MobileNotifBundle\DependencyInjection\Compiler\ClientCollectorPass;
+use LinkValue\JarvisBundle\DependencyInjection\Compiler\ClientCollectorPass;
 
-class LinkValueMobileNotifBundle extends Bundle
+class LinkValueJarvisBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

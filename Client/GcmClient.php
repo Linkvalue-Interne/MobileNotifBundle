@@ -1,23 +1,23 @@
 <?php
 
 /*
- * This file is part of the MobileNotifBundle package.
+ * This file is part of the JarvisBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace LinkValue\MobileNotifBundle\Client;
+namespace LinkValue\JarvisBundle\Client;
 
 use LinkValue\MobileNotif\Client\GcmClient as BaseGcmClient;
 use LinkValue\MobileNotif\Model\Message;
-use LinkValue\MobileNotifBundle\Profiler\ClientProfilableTrait;
-use LinkValue\MobileNotifBundle\Profiler\NullClientProfiler;
+use LinkValue\JarvisBundle\Profiler\ClientProfilableTrait;
+use LinkValue\JarvisBundle\Profiler\NullClientProfiler;
 
 /**
  * Google Cloud Messaging implementation.
  *
- * @package MobileNotifBundle
+ * @package JarvisBundle
  * @author  Jamal Youssefi <jamal.youssefi@gmail.com>
  * @author  Valentin Coulon <valentin.c0610@gmail.com>
  */

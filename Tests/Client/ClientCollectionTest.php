@@ -1,21 +1,21 @@
 <?php
 
 /*
- * This file is part of the MobileNotifBundle package.
+ * This file is part of the JarvisBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace LinkValue\MobileNotifBundle\Tests\Client;
+namespace LinkValue\JarvisBundle\Tests\Client;
 
 use LinkValue\MobileNotif\Client\ClientInterface;
-use LinkValue\MobileNotifBundle\Client\ClientCollection;
+use LinkValue\JarvisBundle\Client\ClientCollection;
 
 /**
  * Test ClientCollection class.
  *
- * @package MobileNotifBundle
+ * @package JarvisBundle
  * @author Oliver Thebault <oliver.thebault@gmail.com>
  */
 class ClientCollectionTest extends \PHPUnit_Framework_TestCase
@@ -47,8 +47,8 @@ class ClientCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $this->clientCollection = new ClientCollection();
         $this->client = $this->prophesize('LinkValue\MobileNotif\Client\ClientInterface')->reveal();
-        $this->apnsClient = $this->prophesize('LinkValue\MobileNotifBundle\Client\ApnsClient')->reveal();
-        $this->gcmClient = $this->prophesize('LinkValue\MobileNotifBundle\Client\GcmClient')->reveal();
+        $this->apnsClient = $this->prophesize('LinkValue\JarvisBundle\Client\ApnsClient')->reveal();
+        $this->gcmClient = $this->prophesize('LinkValue\JarvisBundle\Client\GcmClient')->reveal();
     }
 
     /**

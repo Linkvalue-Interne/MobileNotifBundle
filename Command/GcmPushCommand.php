@@ -1,16 +1,16 @@
 <?php
 
 /*
- * This file is part of the MobileNotifBundle package.
+ * This file is part of the JarvisBundle package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace LinkValue\MobileNotifBundle\Command;
+namespace LinkValue\JarvisBundle\Command;
 
 use LinkValue\MobileNotif\Model\GcmMessage;
-use LinkValue\MobileNotifBundle\Client\GcmClient;
+use LinkValue\JarvisBundle\Client\GcmClient;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * GcmPushCommand.
  *
- * @package MobileNotifBundle
+ * @package JarvisBundle
  * @author Oliver Thebault <oliver.thebault@gmail.com>
  */
 class GcmPushCommand extends ContainerAwareCommand
@@ -31,7 +31,7 @@ class GcmPushCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('link_value_mobile_notif:gcm:push')
+            ->setName('link_value_jarvis:gcm:push')
             ->setDescription('GCM Push notification command.')
             ->addArgument('token', InputArgument::REQUIRED, 'Token of the device which will receive the notification.')
             ->addArgument('message', InputArgument::REQUIRED, 'Notification message.')
@@ -52,7 +52,7 @@ class GcmPushCommand extends ContainerAwareCommand
             ->addToken($token = $input->getArgument('token'))
         ;
 
-        $gcmClients = $this->getContainer()->get('link_value_mobile_notif.clients')->getGcmClients();
+        $gcmClients = $this->getContainer()->get('link_value_jarvis.clients')->getGcmClients();
 
         if ($gcmClients->count() == 0) {
             throw new \RuntimeException('You must configure at least one GCM client to be able to push messages with this command.');

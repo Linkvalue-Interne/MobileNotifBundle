@@ -1,6 +1,6 @@
 <?php
 
-namespace LinkValue\MobileNotifBundle\DependencyInjection;
+namespace LinkValue\JarvisBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -9,9 +9,9 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * This is the class that loads and manages LinkValueMobileNotifBundle configuration.
+ * This is the class that loads and manages LinkValueJarvisBundle configuration.
  */
-class LinkValueMobileNotifExtension extends Extension
+class LinkValueJarvisExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,7 @@ class LinkValueMobileNotifExtension extends Extension
     }
 
     /**
-     * Register each client as service, such as "link_value_mobile_notif.clients.the_client_type.my_custom_client_name"
+     * Register each client as service, such as "link_value_jarvis.clients.the_client_type.my_custom_client_name"
      *
      * @param array $config
      * @param ContainerBuilder $container
@@ -36,7 +36,7 @@ class LinkValueMobileNotifExtension extends Extension
     private function registerClients(array $config, ContainerBuilder $container)
     {
         foreach ($config['clients'] as $clientType => $clients) {
-            $clientFQCN = ($clientType == 'apns') ? 'LinkValue\MobileNotifBundle\Client\ApnsClient' : 'LinkValue\MobileNotifBundle\Client\GcmClient';
+            $clientFQCN = ($clientType == 'apns') ? 'LinkValue\JarvisBundle\Client\ApnsClient' : 'LinkValue\JarvisBundle\Client\GcmClient';
 
             foreach ($clients as $clientName => $clientConfig) {
                 $params = isset($clientConfig['params']) ? $clientConfig['params'] : array();
@@ -46,9 +46,9 @@ class LinkValueMobileNotifExtension extends Extension
                 $clientName = sprintf('%s.%s', $clientType, $clientName);
 
                 // Register client with required stuff
-                $client = $container->register(sprintf('link_value_mobile_notif.clients.%s', $clientName), $clientFQCN)
+                $client = $container->register(sprintf('link_value_jarvis.clients.%s', $clientName), $clientFQCN)
                     ->addMethodCall('setUp', array($params))
-                    ->addTag('link_value_mobile_notif.client', array('name' => $clientName))
+                    ->addTag('link_value_jarvis.client', array('name' => $clientName))
                 ;
 
                 // Set optional logger
